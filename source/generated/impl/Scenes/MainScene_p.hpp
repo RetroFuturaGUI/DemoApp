@@ -54,6 +54,7 @@ namespace TestProject
         std::unique_ptr<RetroFuturaGUI::LineDiagram> _testLineDiagram;
         std::unique_ptr<RetroFuturaGUI::MultilineTextBox> _testMultilineTextBox;
         std::unique_ptr<RetroFuturaGUI::Button> _openPopupButton;
+        std::unique_ptr<RetroFuturaGUI::Button> _openExplorerButton;
         //Non-owning: the window this scene is in, which popups open over
         RetroFuturaGUI::Window* _window { nullptr };
     };

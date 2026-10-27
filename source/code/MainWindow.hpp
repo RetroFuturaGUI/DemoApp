@@ -61,6 +61,15 @@ namespace TestProject
             return _members->_window->WindowShouldClose();
         }
 
+        /// @brief The main window, to open popups over it; this keeps it. Null if setup failed.
+        RetroFuturaGUI::Window* GetWindow() const
+        {
+            if(!_members)
+                return nullptr;
+
+            return _members->_window.get();
+        }
+
     private:
 
 

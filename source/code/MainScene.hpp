@@ -41,6 +41,9 @@ namespace TestProject
         void on_scene_update();
         void on_openPopupButton_click();
 
+        /// @brief Opens a file explorer with every feature, starting in the home folder, and prints what it closes with.
+        void on_openExplorerButton_click();
+
     private:
         std::unique_ptr<MainScene_p> _members;
         void setup(RetroFuturaGUI::Window* parentWindow);

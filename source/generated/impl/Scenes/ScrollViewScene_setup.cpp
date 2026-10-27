@@ -97,19 +97,19 @@ void TestProject::ScrollViewScene::setup(RetroFuturaGUI::Window* parentWindow)
     _members->_testButton->SetRotation(glm::vec3(0.0f));
     std::vector<glm::vec4> testv = std::vector<glm::vec4>({{ 0.024f, 0.478f, 0.965f, 1.0f},{ 0.024f, 0.478f, 0.965f, 1.0f} ,  { 0.980f, 0.851f, 0.875f, 1.0f }
             , { 0.965f, 0.761f, 0.965f, 1.0f }, { 0.024f, 0.478f, 0.965f, 1.0f},{ 0.024f, 0.478f, 0.965f, 1.0f} , { 0.718f, 0.976f, 0.992f, 1.0f }, { 0.980f, 0.851f, 0.875f, 1.0f }, { 0.980f, 0.851f, 0.875f, 1.0f }});
-    _members->_testButton->SetBackgroundColor(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_testButton->SetBackgroundColor(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f), RetroFuturaGUI::ColorState::Hover);
-    _members->_testButton->SetBackgroundColor(glm::vec4(0.4f, 0.4f, 0.4f, 1.0f), RetroFuturaGUI::ColorState::Clicked);
-    _members->_testButton->SetBackgroundColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f), RetroFuturaGUI::ColorState::Disabled);
-    _members->_testButton->SetBackgroundFillType(RetroFuturaGUI::FillType::SOLID);
+    _members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.2f, 0.2f, 0.2f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.3f, 0.3f, 0.3f, 1.0f) }, RetroFuturaGUI::ColorState::Hover);
+    _members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.4f, 0.4f, 0.4f, 1.0f) }, RetroFuturaGUI::ColorState::Clicked);
+    _members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.1f, 0.1f, 0.1f, 1.0f) }, RetroFuturaGUI::ColorState::Disabled);
+    _members->_testButton->SetBackgroundFillType(RetroFuturaGUI::FillType::Solid);
 
-    _members->_testButton->SetBorderColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+    _members->_testButton->SetBorderColors(std::array { glm::vec4(0.5f, 0.5f, 0.5f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     _members->_testButton->SetBorderColors(testv, RetroFuturaGUI::ColorState::Hover);
     _members->_testButton->SetBorderColors(testv, RetroFuturaGUI::ColorState::Clicked);
 
     //_members->_testButton->SetBorderGradientAnimationSpeed(0.0005f);
     _members->_testButton->SetBorderGradientRotationSpeed(5.0f);
-    _members->_testButton->SetBorderFillType(RetroFuturaGUI::FillType::HUESTAR_GRADIENT);
+    _members->_testButton->SetBorderFillType(RetroFuturaGUI::FillType::HueStarGradient);
     _members->_testButton->SetBorderWidth(5.0f);
     _members->_testButton->SetCornerRadii(glm::vec4(20.0f));
 #if defined(TARGET_PLATFORM_LINUX)
@@ -125,9 +125,9 @@ void TestProject::ScrollViewScene::setup(RetroFuturaGUI::Window* parentWindow)
     {
 	_members->_testButton->SetCornerRadii(glm::vec4(45.0f));
 	_members->_testButton->SetWindowBackgroundImageTextureID(parentWindow->GetBackgroundImageId());
-	_members->_testButton->SetBackgroundColor(glm::vec4(0.0f, 0.0f, 1.0f, 0.65f), RetroFuturaGUI::ColorState::Enabled);
-	_members->_testButton->SetBackgroundColor(glm::vec4(0.1f, 0.1f, 1.0f, 0.65f), RetroFuturaGUI::ColorState::Hover);
-	_members->_testButton->SetBackgroundColor(glm::vec4(0.2f, 0.2f, 1.0f, 0.75f), RetroFuturaGUI::ColorState::Clicked);
+	_members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.0f, 0.0f, 1.0f, 0.65f) }, RetroFuturaGUI::ColorState::Enabled);
+	_members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.1f, 0.1f, 1.0f, 0.65f) }, RetroFuturaGUI::ColorState::Hover);
+	_members->_testButton->SetBackgroundColors(std::array { glm::vec4(0.2f, 0.2f, 1.0f, 0.75f) }, RetroFuturaGUI::ColorState::Clicked);
     }*/
 
 //Histogram
@@ -140,12 +140,12 @@ void TestProject::ScrollViewScene::setup(RetroFuturaGUI::Window* parentWindow)
     //300 tall, so video, button and histogram (270 + 90 + 300 = 660) nearly fill the 680 px under the 40 px menu bar, before the color picker below adds its 250.
     //The ScrollView doesn't clip yet: the overflow below runs off the window.
     _members->_testHistogram->SetSize(glm::vec3(400.0f, 300.0f, 0.05f));
-    _members->_testHistogram->SetBackgroundColor(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+    _members->_testHistogram->SetBackgroundColors(std::array { glm::vec4(0.2f, 0.2f, 0.2f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     _members->_testHistogram->SetGraphColors(testv, RetroFuturaGUI::ColorState::Enabled);
     _members->_testHistogram->SetMinValue(0.0f);
     _members->_testHistogram->SetMaxValue(1.0f);
-    _members->_testHistogram->EnableGraph(true);
-    _members->_testHistogram->EnableIndicator(false);
+    _members->_testHistogram->ShowGraph(true);
+    _members->_testHistogram->ShowIndicator(false);
 
 //ColorPicker
     //Last in the ScrollView, so the stack is 270 + 90 + 300 + 250 = 910 px and leaves 230 px to scroll in the 680 px under the menu bar.

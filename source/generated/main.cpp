@@ -2,6 +2,7 @@
 #include "IncludeHelper.hpp"
 #include <print>
 #include "ResourceManager.hpp"
+#include "PlatformBridge.hpp"
 #include "Window.hpp"
 #include <chrono>
 #include <thread>
@@ -29,11 +30,15 @@ extern "C" EXPORT_API void InitRetroFuturaGUI()
 
 extern "C" EXPORT_API void Draw()
 {
+	if(!mainWindowTest)
+		return;
+
 	while(!mainWindowTest->WindowShouldClose())
 	{
 		mainWindowTest->Draw();
 	}
 
+	mainWindowTest.reset(); //its GL objects go while their contexts exist; left to the library's unloading, they crash it
 	RetroFuturaGUI::GlfwTerminate();
 }
 
@@ -121,7 +126,7 @@ extern "C" EXPORT_API void SetWindowBorderImageTextureID(const char* id, u32 tex
 
 extern "C" EXPORT_API void SetEnabled(const char* id, bool enabled)
 {
-	RetroFuturaGUI::DynamicLibWidgetManager::SetEnabled(id, enabled);
+	RetroFuturaGUI::DynamicLibWidgetManager::SetEnabled(id, enabled, true); //the bindings get an emitSignal of their own with the interop update
 }
 
 extern "C" EXPORT_API void SetTextColors(const char* id, f32* colors, u32 colorCount, RetroFuturaGUI::ColorState colorState)
@@ -133,6 +138,15 @@ extern "C" EXPORT_API void SetTextColors(const char* id, f32* colors, u32 colorC
 extern "C" EXPORT_API void SetText(const char* id, const char* text)
 {
 	RetroFuturaGUI::DynamicLibWidgetManager::SetText(id, text);
+}
+
+//Strings are UTF-8; a null start path starts in the working directory and null extensions list every file
+extern "C" EXPORT_API bool OpenFileExplorer(const char* title, i32 width, i32 height, const char* startPath, u32 flags, const char* extensions, RetroFuturaGUI::PathsCallbackType onResult, RetroFuturaGUI::CallbackType onDismiss)
+{
+	if(!mainWindowTest)
+		return false;
+
+	return RetroFuturaGUI::DynamicLibWidgetManager::OpenFileExplorer(mainWindowTest->GetWindow(), title ? title : "", width, height, startPath ? startPath : "", flags, extensions ? extensions : ".*", onResult, onDismiss);
 }
 
 #else

@@ -60,7 +60,7 @@ void TestProject::MenuBarScene::setup(RetroFuturaGUI::Window* parentWindow)
         _members->_menuBarLabel->SetFontFamily("Arial", 25.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Normal);
         _members->_menuBarLabel->SetText("Docked MenuBar Scene", false);
         _members->_menuBarLabel->SetTextAlignment(RetroFuturaGUI::TextAlignment::Left);
-        _members->_menuBarLabel->SetTextColor(glm::vec4(1.0f), RetroFuturaGUI::ColorState::Enabled);
+        _members->_menuBarLabel->SetTextColors(std::array { glm::vec4(1.0f) }, RetroFuturaGUI::ColorState::Enabled);
         _members->_menuBarLabel->SetTextPadding(5.0f);
         _rootLasagna->AttachWidget(0, 0, 0, &*_members->_menuBarLabel, RetroFuturaGUI::SizingMode::FILL, 1, 2);
     }

@@ -27,7 +27,7 @@ std::unique_ptr<TestProject::PopupScene::NamePopup> TestProject::PopupScene::Cre
     window->SetWindowTitle(std::format("Popup {}", depth + 1));
     window->SetCornerRadii(glm::vec4(12.0f));
     window->SetBorderWidth(1.0f);
-    window->SetBorderColor(glm::vec4(0.35f, 0.35f, 0.45f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+    window->SetBorderColors(std::array { glm::vec4(0.35f, 0.35f, 0.45f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
 
     popup->AddScene(std::make_unique<PopupScene>(popup.get(), depth));
 
@@ -112,19 +112,19 @@ void TestProject::PopupScene::setup(NamePopup* popup, const uSize depth)
 //Bar
     _members->_bar = std::make_unique<RetroFuturaGUI::MenuBar>("PopupBar", &projection, rootLasagna, RetroFuturaGUI::WidgetTypeID::Lasagna, window);
     _members->_bar->SetDockingEdge(RetroFuturaGUI::MenuBar::DockingEdge::Top);
-    _members->_bar->SetBackgroundColor(glm::vec4(0.08f, 0.08f, 0.12f, 0.9f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_bar->SetBackgroundFillType(RetroFuturaGUI::FillType::SOLID);
-    _members->_bar->SetBorderColor(glm::vec4(0.35f, 0.35f, 0.45f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+    _members->_bar->SetBackgroundColors(std::array { glm::vec4(0.08f, 0.08f, 0.12f, 0.9f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_bar->SetBackgroundFillType(RetroFuturaGUI::FillType::Solid);
+    _members->_bar->SetBorderColors(std::array { glm::vec4(0.35f, 0.35f, 0.45f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     _members->_bar->SetBorderWidth(1.0f);
     _members->_bar->SetCornerRadii(glm::vec4(12.0f, 12.0f, 0.0f, 0.0f)); //the window's top corners, which a popup never squares
-    _members->_bar->SetItemBackgroundColor(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_bar->SetItemBackgroundColor(glm::vec4(0.25f, 0.25f, 0.35f, 0.9f), RetroFuturaGUI::ColorState::Hover);
-    _members->_bar->SetItemBackgroundColor(glm::vec4(0.35f, 0.35f, 0.5f, 0.95f), RetroFuturaGUI::ColorState::Clicked);
-    _members->_bar->SetItemBackgroundColor(glm::vec4(0.1f, 0.1f, 0.1f, 0.6f), RetroFuturaGUI::ColorState::Disabled);
-    _members->_bar->SetItemBorderColor(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_bar->SetItemBorderColor(glm::vec4(0.5f, 0.5f, 0.65f, 1.0f), RetroFuturaGUI::ColorState::Hover);
-    _members->_bar->SetItemBorderColor(glm::vec4(0.6f, 0.6f, 0.8f, 1.0f), RetroFuturaGUI::ColorState::Clicked);
-    _members->_bar->SetItemBorderColor(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), RetroFuturaGUI::ColorState::Disabled);
+    _members->_bar->SetItemBackgroundColors(std::array { glm::vec4(0.0f, 0.0f, 0.0f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_bar->SetItemBackgroundColors(std::array { glm::vec4(0.25f, 0.25f, 0.35f, 0.9f) }, RetroFuturaGUI::ColorState::Hover);
+    _members->_bar->SetItemBackgroundColors(std::array { glm::vec4(0.35f, 0.35f, 0.5f, 0.95f) }, RetroFuturaGUI::ColorState::Clicked);
+    _members->_bar->SetItemBackgroundColors(std::array { glm::vec4(0.1f, 0.1f, 0.1f, 0.6f) }, RetroFuturaGUI::ColorState::Disabled);
+    _members->_bar->SetItemBorderColors(std::array { glm::vec4(0.0f, 0.0f, 0.0f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_bar->SetItemBorderColors(std::array { glm::vec4(0.5f, 0.5f, 0.65f, 1.0f) }, RetroFuturaGUI::ColorState::Hover);
+    _members->_bar->SetItemBorderColors(std::array { glm::vec4(0.6f, 0.6f, 0.8f, 1.0f) }, RetroFuturaGUI::ColorState::Clicked);
+    _members->_bar->SetItemBorderColors(std::array { glm::vec4(0.0f, 0.0f, 0.0f, 0.0f) }, RetroFuturaGUI::ColorState::Disabled);
     _members->_bar->SetItemBorderWidth(1.0f);
 
     //The title drags the popup, the spacer takes what is left, and the close button is a square of the bar's height
@@ -143,7 +143,7 @@ void TestProject::PopupScene::setup(NamePopup* popup, const uSize depth)
     barTitle->SetFontFamily("Arial", 25.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Normal);
     barTitle->SetText(std::format("Popup {}", depth + 1), false);
     barTitle->SetTextAlignment(RetroFuturaGUI::TextAlignment::Left);
-    barTitle->SetTextColor(glm::vec4(1.0f), RetroFuturaGUI::ColorState::Enabled);
+    barTitle->SetTextColors(std::array { glm::vec4(1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     barTitle->SetTextPadding(5.0f);
     //As tall as the bar: 25 pt rasterizes about 33 px tall, and text is clipped to its label, so a 30 px label cuts off the tails of p, g and y
     barTitle->SetSize(glm::vec3(200.0f, 40.0f, 0.01f));
@@ -157,9 +157,9 @@ void TestProject::PopupScene::setup(NamePopup* popup, const uSize depth)
     closeButton->SetSize(glm::vec3(28.0f, 28.0f, 0.01f));
     closeButton->SetBackgroundImage("Resources/img/CloseIcon.svg");
     closeButton->SetBackgroundImagePadding(4.0f);
-    closeButton->SetBackgroundColor(glm::vec4(1.0f, 0.1f, 0.1f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    closeButton->SetBackgroundColor(glm::vec4(1.0f, 0.2f, 0.2f, 0.45f), RetroFuturaGUI::ColorState::Hover);
-    closeButton->SetBackgroundColor(glm::vec4(1.0f, 0.3f, 0.3f, 0.6f), RetroFuturaGUI::ColorState::Clicked);
+    closeButton->SetBackgroundColors(std::array { glm::vec4(1.0f, 0.1f, 0.1f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    closeButton->SetBackgroundColors(std::array { glm::vec4(1.0f, 0.2f, 0.2f, 0.45f) }, RetroFuturaGUI::ColorState::Hover);
+    closeButton->SetBackgroundColors(std::array { glm::vec4(1.0f, 0.3f, 0.3f, 0.6f) }, RetroFuturaGUI::ColorState::Clicked);
     closeButton->SetBorderWidth(0.0f);
     //Closing a popup without values dismisses it, like a menu bar's close button closes a window
     closeButton->Connect_OnClick([popup]() { popup->Dismiss(); }, false);
@@ -173,7 +173,7 @@ void TestProject::PopupScene::setup(NamePopup* popup, const uSize depth)
     _members->_prompt->SetFontFamily("Arial", 25.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Normal);
     _members->_prompt->SetText("Enter a name:", false);
     _members->_prompt->SetTextAlignment(RetroFuturaGUI::TextAlignment::Left);
-    _members->_prompt->SetTextColor(glm::vec4(1.0f), RetroFuturaGUI::ColorState::Enabled);
+    _members->_prompt->SetTextColors(std::array { glm::vec4(1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     _members->_prompt->SetTextPadding(5.0f);
     _members->_prompt->SetSize(glm::vec3(440.0f, 30.0f, 0.01f));
     rootLasagna->AttachWidget(1, 0, 0, &*_members->_prompt, RetroFuturaGUI::SizingMode::FIXED, 1, 3);
@@ -182,17 +182,17 @@ void TestProject::PopupScene::setup(NamePopup* popup, const uSize depth)
     _members->_nameTextBox = std::make_unique<RetroFuturaGUI::TextBox>("PopupNameTextBox", &projection, rootLasagna, RetroFuturaGUI::WidgetTypeID::Lasagna, window);
     _members->_nameTextBox->SetSize(glm::vec3(440.0f, 44.0f, 0.01f));
     _members->_nameTextBox->SetCornerRadii(glm::vec4(10.0f));
-    _members->_nameTextBox->SetBackgroundColor(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_nameTextBox->SetBackgroundColor(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f), RetroFuturaGUI::ColorState::Hover);
-    _members->_nameTextBox->SetBackgroundColor(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), RetroFuturaGUI::ColorState::Clicked);
-    _members->_nameTextBox->SetBackgroundFillType(RetroFuturaGUI::FillType::SOLID);
-    _members->_nameTextBox->SetBorderColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+    _members->_nameTextBox->SetBackgroundColors(std::array { glm::vec4(0.2f, 0.2f, 0.2f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_nameTextBox->SetBackgroundColors(std::array { glm::vec4(0.3f, 0.3f, 0.3f, 1.0f) }, RetroFuturaGUI::ColorState::Hover);
+    _members->_nameTextBox->SetBackgroundColors(std::array { glm::vec4(0.2f, 0.2f, 0.2f, 1.0f) }, RetroFuturaGUI::ColorState::Clicked);
+    _members->_nameTextBox->SetBackgroundFillType(RetroFuturaGUI::FillType::Solid);
+    _members->_nameTextBox->SetBorderColors(std::array { glm::vec4(0.5f, 0.5f, 0.5f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     _members->_nameTextBox->SetBorderWidth(2.0f);
     _members->_nameTextBox->SetFontFamily("Arial", 25.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Normal);
     _members->_nameTextBox->SetTextAlignment(RetroFuturaGUI::TextAlignment::Left);
     _members->_nameTextBox->SetTextPadding(5.0f);
     _members->_nameTextBox->SetPlaceholderText("Name...");
-    _members->_nameTextBox->SetPlaceholderTextColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f));
+    _members->_nameTextBox->SetPlaceholderTextColors(std::array { glm::vec4(0.5f, 0.5f, 0.5f, 1.0f) });
     rootLasagna->AttachWidget(2, 0, 0, &*_members->_nameTextBox, RetroFuturaGUI::SizingMode::FIXED, 1, 3);
 
 //Buttons
@@ -218,11 +218,11 @@ void TestProject::PopupScene::setup(NamePopup* popup, const uSize depth)
 
         button->SetSize(glm::vec3(130.0f, 44.0f, 0.01f));
         button->SetCornerRadii(glm::vec4(10.0f));
-        button->SetBackgroundColor(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
-        button->SetBackgroundColor(glm::vec4(0.3f, 0.3f, 0.3f, 1.0f), RetroFuturaGUI::ColorState::Hover);
-        button->SetBackgroundColor(glm::vec4(0.4f, 0.4f, 0.4f, 1.0f), RetroFuturaGUI::ColorState::Clicked);
-        button->SetBackgroundFillType(RetroFuturaGUI::FillType::SOLID);
-        button->SetBorderColor(glm::vec4(0.5f, 0.5f, 0.5f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+        button->SetBackgroundColors(std::array { glm::vec4(0.2f, 0.2f, 0.2f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
+        button->SetBackgroundColors(std::array { glm::vec4(0.3f, 0.3f, 0.3f, 1.0f) }, RetroFuturaGUI::ColorState::Hover);
+        button->SetBackgroundColors(std::array { glm::vec4(0.4f, 0.4f, 0.4f, 1.0f) }, RetroFuturaGUI::ColorState::Clicked);
+        button->SetBackgroundFillType(RetroFuturaGUI::FillType::Solid);
+        button->SetBorderColors(std::array { glm::vec4(0.5f, 0.5f, 0.5f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
         button->SetBorderWidth(2.0f);
         button->SetFontFamily("Arial", 25.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Normal);
         button->SetText(text, false);

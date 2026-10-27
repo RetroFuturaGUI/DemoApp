@@ -56,7 +56,7 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
     _members->_scene->SetLasagnaAxis(menuBarAxis, &projection);
     _members->_scene->SetReservedEdge(RetroFuturaGUI::DockEdge::Top, 40.0f);
     //While the window sits in a tab, the tab's field shows its title and close button instead, and the content takes the strip
-    _members->_scene->SetHiddenInTab(true);
+    _members->_scene->ShowInTab(false);
 
     RetroFuturaGUI::Lasagna* rootLasagna { _members->_scene->GetRootContainer<RetroFuturaGUI::Lasagna>() };
 
@@ -68,28 +68,28 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
     //Top also decides the slots run along X. The Lasagna sets the final position, so the margin and
     //alignment the docking would apply are left at their defaults here.
     _members->_menuBar->SetDockingEdge(RetroFuturaGUI::MenuBar::DockingEdge::Top);
-    _members->_menuBar->SetBackgroundColor(glm::vec4(0.08f, 0.08f, 0.12f, 0.9f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_menuBar->SetBackgroundFillType(RetroFuturaGUI::FillType::SOLID);
-    _members->_menuBar->SetBorderColor(glm::vec4(0.35f, 0.35f, 0.45f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+    _members->_menuBar->SetBackgroundColors(std::array { glm::vec4(0.08f, 0.08f, 0.12f, 0.9f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_menuBar->SetBackgroundFillType(RetroFuturaGUI::FillType::Solid);
+    _members->_menuBar->SetBorderColors(std::array { glm::vec4(0.35f, 0.35f, 0.45f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     _members->_menuBar->SetBorderWidth(1.0f);
 
     //Item colors are shared by every slot; only the slot under the cursor draws the hover/click ones.
-    _members->_menuBar->SetItemBackgroundColor(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_menuBar->SetItemBackgroundColor(glm::vec4(0.25f, 0.25f, 0.35f, 0.9f), RetroFuturaGUI::ColorState::Hover);
-    _members->_menuBar->SetItemBackgroundColor(glm::vec4(0.35f, 0.35f, 0.5f, 0.95f), RetroFuturaGUI::ColorState::Clicked);
-    _members->_menuBar->SetItemBackgroundColor(glm::vec4(0.1f, 0.1f, 0.1f, 0.6f), RetroFuturaGUI::ColorState::Disabled);
+    _members->_menuBar->SetItemBackgroundColors(std::array { glm::vec4(0.0f, 0.0f, 0.0f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_menuBar->SetItemBackgroundColors(std::array { glm::vec4(0.25f, 0.25f, 0.35f, 0.9f) }, RetroFuturaGUI::ColorState::Hover);
+    _members->_menuBar->SetItemBackgroundColors(std::array { glm::vec4(0.35f, 0.35f, 0.5f, 0.95f) }, RetroFuturaGUI::ColorState::Clicked);
+    _members->_menuBar->SetItemBackgroundColors(std::array { glm::vec4(0.1f, 0.1f, 0.1f, 0.6f) }, RetroFuturaGUI::ColorState::Disabled);
     //Every state a slot can draw in needs its own color: MenuBar starts these vectors empty, and an
     //empty one is simply not pushed, so an unset state would keep the colors of the previous one.
-    _members->_menuBar->SetItemBorderColor(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_menuBar->SetItemBorderColor(glm::vec4(0.5f, 0.5f, 0.65f, 1.0f), RetroFuturaGUI::ColorState::Hover);
-    _members->_menuBar->SetItemBorderColor(glm::vec4(0.6f, 0.6f, 0.8f, 1.0f), RetroFuturaGUI::ColorState::Clicked);
-    _members->_menuBar->SetItemBorderColor(glm::vec4(0.0f, 0.0f, 0.0f, 0.0f), RetroFuturaGUI::ColorState::Disabled);
+    _members->_menuBar->SetItemBorderColors(std::array { glm::vec4(0.0f, 0.0f, 0.0f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_menuBar->SetItemBorderColors(std::array { glm::vec4(0.5f, 0.5f, 0.65f, 1.0f) }, RetroFuturaGUI::ColorState::Hover);
+    _members->_menuBar->SetItemBorderColors(std::array { glm::vec4(0.6f, 0.6f, 0.8f, 1.0f) }, RetroFuturaGUI::ColorState::Clicked);
+    _members->_menuBar->SetItemBorderColors(std::array { glm::vec4(0.0f, 0.0f, 0.0f, 0.0f) }, RetroFuturaGUI::ColorState::Disabled);
     _members->_menuBar->SetItemBorderWidth(1.0f);
 
-    _members->_menuBar->EnableSeparatorLines(true);
+    _members->_menuBar->ShowSeparatorLines(true);
     _members->_menuBar->SetSeparatorLinesThickness(1.0f);
-    _members->_menuBar->SetSeparatorLinesColor(glm::vec4(0.4f, 0.4f, 0.5f, 0.8f), RetroFuturaGUI::ColorState::Enabled);
-    _members->_menuBar->SetSeparatorLinesColor(glm::vec4(0.25f, 0.25f, 0.3f, 0.8f), RetroFuturaGUI::ColorState::Disabled);
+    _members->_menuBar->SetSeparatorLinesColors(std::array { glm::vec4(0.4f, 0.4f, 0.5f, 0.8f) }, RetroFuturaGUI::ColorState::Enabled);
+    _members->_menuBar->SetSeparatorLinesColors(std::array { glm::vec4(0.25f, 0.25f, 0.3f, 0.8f) }, RetroFuturaGUI::ColorState::Disabled);
 
     /* The cells have to exist before anything can be put in one, and the definitions are what create
        them. Title and menu take their content's width, the spacer soaks up whatever is left, and the
@@ -116,7 +116,7 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
     menuBarLabel->SetFontFamily("Arial", 25.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Normal);
     menuBarLabel->SetText(title, false);
     menuBarLabel->SetTextAlignment(RetroFuturaGUI::TextAlignment::Left);
-    menuBarLabel->SetTextColor(glm::vec4(1.0f), RetroFuturaGUI::ColorState::Enabled);
+    menuBarLabel->SetTextColors(std::array { glm::vec4(1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     menuBarLabel->SetTextPadding(5.0f);
     //As tall as the bar: 25 pt rasterizes about 33 px tall, and text is clipped to its label, so a 30 px label cuts off the tails of p, g and y
     menuBarLabel->SetSize(glm::vec3(200.0f, 40.0f, 0.01f));
@@ -156,9 +156,9 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
     buttonMinimize->SetBackgroundImage("Resources/img/Minimize.svg");
     buttonMinimize->SetBackgroundImagePadding(4.0f);
     //buttonMinimize->SetCornerRadii(glm::vec4(10.0f));
-    buttonMinimize->SetBackgroundColor(glm::vec4(0.5f, 0.5f, 0.5f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    buttonMinimize->SetBackgroundColor(glm::vec4(0.7f, 0.7f, 0.7f, 0.35f), RetroFuturaGUI::ColorState::Hover);
-    buttonMinimize->SetBackgroundColor(glm::vec4(0.8f, 0.8f, 0.8f, 0.55f), RetroFuturaGUI::ColorState::Clicked);
+    buttonMinimize->SetBackgroundColors(std::array { glm::vec4(0.5f, 0.5f, 0.5f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    buttonMinimize->SetBackgroundColors(std::array { glm::vec4(0.7f, 0.7f, 0.7f, 0.35f) }, RetroFuturaGUI::ColorState::Hover);
+    buttonMinimize->SetBackgroundColors(std::array { glm::vec4(0.8f, 0.8f, 0.8f, 0.55f) }, RetroFuturaGUI::ColorState::Clicked);
     buttonMinimize->SetBorderWidth(0.0f);
     buttonMinimize->Connect_OnClick([window]() { glfwIconifyWindow(window); }, false);
     _members->_menuBar->AddWidget(std::move(buttonMinimize), 4);
@@ -175,9 +175,9 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
         : "Resources/img/Maximize.svg");
     buttonMaximize->SetBackgroundImagePadding(4.0f);
     //buttonMaximize->SetCornerRadii(glm::vec4(10.0f));
-    buttonMaximize->SetBackgroundColor(glm::vec4(0.5f, 0.5f, 0.5f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    buttonMaximize->SetBackgroundColor(glm::vec4(0.7f, 0.7f, 0.7f, 0.35f), RetroFuturaGUI::ColorState::Hover);
-    buttonMaximize->SetBackgroundColor(glm::vec4(0.8f, 0.8f, 0.8f, 0.55f), RetroFuturaGUI::ColorState::Clicked);
+    buttonMaximize->SetBackgroundColors(std::array { glm::vec4(0.5f, 0.5f, 0.5f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    buttonMaximize->SetBackgroundColors(std::array { glm::vec4(0.7f, 0.7f, 0.7f, 0.35f) }, RetroFuturaGUI::ColorState::Hover);
+    buttonMaximize->SetBackgroundColors(std::array { glm::vec4(0.8f, 0.8f, 0.8f, 0.55f) }, RetroFuturaGUI::ColorState::Clicked);
     buttonMaximize->SetBorderWidth(0.0f);
     //The button is captured so the icon can follow the state; it outlives the callback, being owned by
     //the flex slot the callback is reached through.
@@ -213,9 +213,9 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
     buttonClose->SetBackgroundImage("Resources/img/CloseIcon.svg");
     buttonClose->SetBackgroundImagePadding(4.0f);
     //buttonClose->SetCornerRadii(glm::vec4(10.0f));
-    buttonClose->SetBackgroundColor(glm::vec4(1.0f, 0.1f, 0.1f, 0.0f), RetroFuturaGUI::ColorState::Enabled);
-    buttonClose->SetBackgroundColor(glm::vec4(1.0f, 0.2f, 0.2f, 0.45f), RetroFuturaGUI::ColorState::Hover);
-    buttonClose->SetBackgroundColor(glm::vec4(1.0f, 0.3f, 0.3f, 0.6f), RetroFuturaGUI::ColorState::Clicked);
+    buttonClose->SetBackgroundColors(std::array { glm::vec4(1.0f, 0.1f, 0.1f, 0.0f) }, RetroFuturaGUI::ColorState::Enabled);
+    buttonClose->SetBackgroundColors(std::array { glm::vec4(1.0f, 0.2f, 0.2f, 0.45f) }, RetroFuturaGUI::ColorState::Hover);
+    buttonClose->SetBackgroundColors(std::array { glm::vec4(1.0f, 0.3f, 0.3f, 0.6f) }, RetroFuturaGUI::ColorState::Clicked);
     buttonClose->SetBorderWidth(0.0f);
     buttonClose->Connect_OnClick([window]() { glfwSetWindowShouldClose(window, GLFW_TRUE); }, false);
     _members->_menuBar->AddWidget(std::move(buttonClose), 6);
@@ -264,18 +264,18 @@ void TestProject::CustomMenuBarScene::setup(RetroFuturaGUI::Window* parentWindow
             {
                 if(isEnabled)
                 {
-                    _members->_undockHandle->ClearPathFill(path.name);
+                    _members->_undockHandle->ClearPathFill(path._Name);
                     continue;
                 }
 
-                _members->_undockHandle->SetPathFill(path.name, RetroFuturaGUI::SvgPathFill
+                _members->_undockHandle->SetPathFill(path._Name, RetroFuturaGUI::SvgPathFill
                 {
-                    .fillType = RetroFuturaGUI::FillType::SOLID,
-                    .colors = { glm::vec4(0.4f, 0.4f, 0.45f, 1.0f) },
-                    .gradientDegree = 0.0f,
-                    .gradientOffset = 0.0f,
-                    .gradientAnimationSpeed = 0.0f,
-                    .gradientRotationSpeed = 0.0f
+                    ._FillType = RetroFuturaGUI::FillType::Solid,
+                    ._Colors = { glm::vec4(0.4f, 0.4f, 0.45f, 1.0f) },
+                    ._GradientDegree = 0.0f,
+                    ._GradientOffset = 0.0f,
+                    ._GradientAnimationSpeed = 0.0f,
+                    ._GradientRotationSpeed = 0.0f
                 });
             }
         }, false);

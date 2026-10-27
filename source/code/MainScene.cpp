@@ -3,17 +3,19 @@
 #include "PopupScene.hpp"
 #include "Window.hpp"
 #include <print>
-#include "AudioMetadata.hpp"
+#include "AudioMetadataReader.hpp"
+#include "FileExplorer.hpp"
+#include "PlatformBridge.hpp"
 #include <format>
 #include <string>
 #include <type_traits>
 #include <variant>
 
-// Prints everything ReadAudioMetadata finds. The format-specific part goes through std::visit,
+// Prints everything AudioMetadataReader::Read finds. The format-specific part goes through std::visit,
 // which hands over whichever struct _Details holds.
 static void printAudioMetadata(std::string_view path)
 {
-    const std::optional<RetroFuturaGUI::AudioMetadata> result = RetroFuturaGUI::ReadAudioMetadata(path);
+    const std::optional<RetroFuturaGUI::AudioMetadata> result = RetroFuturaGUI::AudioMetadataReader::Read(path);
 
     std::println("[Metadata] {}", path);
 
@@ -227,4 +229,40 @@ void TestProject::MainScene::on_openPopupButton_click()
         return;
 
     _members->_window->PushPopup(PopupScene::CreatePopup(0));
+}
+
+void TestProject::MainScene::on_openExplorerButton_click()
+{
+    if(!_members)
+        return;
+
+    if(!_members->_window)
+        return;
+
+    std::unique_ptr<RetroFuturaGUI::FileExplorer> explorer { std::make_unique<RetroFuturaGUI::FileExplorer>("File Explorer", 1000, 680) };
+
+    if(!explorer)
+        return;
+
+#if defined(TARGET_PLATFORM_LINUX)
+    explorer->SetFontFamily("Noto Sans", 18.0f, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular); //with Japanese, as MainWindow_setup loads it; Arial, the explorer's own, is rarely there
+#endif
+
+    explorer->Connect_OnResult([](std::vector<std::string> paths)
+        {
+            std::println("The file explorer chose {} paths", paths.size());
+
+            for(const std::string& path : paths)
+                std::println("    {}", path);
+        }, false);
+    explorer->Connect_OnDismiss([]() { std::println("The file explorer was dismissed"); }, false);
+
+    //UTF-8, as Open takes paths
+    const std::u8string home { PlatformBridge::FileSystem::GetKnownFolder(PlatformBridge::FileSystem::KnownFolder::Home).u8string() };
+    using enum RetroFuturaGUI::FileExplorer::FileExplorerFlags;
+
+    if(!explorer->Open(std::string(home.begin(), home.end()), MultiFile | ShowFileExtensions | Previews | FileOperations | DeletePermanently | AskOnNameClash))
+        return;
+
+    _members->_window->PushPopup(std::move(explorer));
 }

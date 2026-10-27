@@ -50,6 +50,7 @@ if(DEFINED LANG AND LANG)
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/ScrollViewScene.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/PopupScene.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/TabScene.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/NoteScene.cpp"
     )
     set_target_properties(TestProject PROPERTIES OUTPUT_NAME "TestProjectNative")
     set(DYNLIB_MODE ON CACHE BOOL "Build as a dynamic library")
@@ -76,6 +77,7 @@ else()
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/ScrollViewScene.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/PopupScene.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/TabScene.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/NoteScene.cpp"
     )
 
     # MSVC only: sets the process codepage to UTF-8 so narrow paths work - see app.manifest.

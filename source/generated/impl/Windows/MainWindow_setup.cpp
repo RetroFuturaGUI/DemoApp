@@ -12,7 +12,7 @@
 #include "IncludeHelper.hpp"
 #include "PlatformBridge.hpp"
 #include "Fonts.hpp"
-#include "Rectangle.hpp"
+#include "Plane.hpp"
 #include "UnicodeBlocks.hpp"
 #include <glm/ext/vector_float3.hpp>
 #include <memory>
@@ -28,12 +28,12 @@ void TestProject::MainWindow::setup(std::string_view windowTitle, const i32 widt
     _members->_window = std::make_unique<RetroFuturaGUI::Window>(_members->_name, width, height);
     std::vector<glm::vec4> _windowBgColors { { 0.0f, 0.2f, 0.7f, 1.0f }, { 0.61f, 0.06f, 0.5f, 1.0f }, { 0.0f, 0.1f, 0.69f, 1.0f }};
     _members->_window->SetBackgroundColors(_windowBgColors, RetroFuturaGUI::ColorState::Enabled);
-    _members->_window->SetBackgroundFillType(RetroFuturaGUI::FillType::LINEAR_GRADIENT);
+    _members->_window->SetBackgroundFillType(RetroFuturaGUI::FillType::LinearShift);
     _members->_window->SetBackgroundGradientAnimationSpeed(0.002f);
     _members->_window->SetBackgroundGradientRotationSpeed(0.1f);
     static std::vector<f32> dotDiameters = { 5.0f, 0.0f,5.0f };
     _members->_window->SetBackgroundPrimaryRasterWidthTransfer(dotDiameters);
-    _members->_window->SetBackgroundDotDistance(25.0f);
+    _members->_window->SetBackgroundRasterSpacing(20.0f);
     _members->_window->SetBackgroundRasterDegree(35.0f);
     _members->_window->SetBackgroundPrimaryRasterColor(glm::vec4(0.6f, 0.6f, 0.6f, 0.8f));
     _members->_window->SetBackgroundRasterAnimationSpeed(-0.13f);
@@ -53,11 +53,44 @@ void TestProject::MainWindow::setup(std::string_view windowTitle, const i32 widt
     RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, Latin1SupplementFirst, Latin1SupplementLast);
     RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HiraganaFirst, HiraganaLast);
     RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, KatakanaFirst, KatakanaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKSymbolsandPunctuationFirst, CJKSymbolsandPunctuationLast); //、。「」 and 々, which repeats a kanji
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKUnifiedIdeographsFirst, CJKUnifiedIdeographsLast); //the kanji
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HalfwidthandFullwidthFormsFirst, HalfwidthandFullwidthFormsLast); //！？：（） and full-width letters
+
+    //The file explorer's font in MainScene, so Japanese file names show
+    RetroFuturaGUI::FontManager::LoadFont("Noto Sans", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, BasicLatinFirst, BasicLatinLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HiraganaFirst, HiraganaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, KatakanaFirst, KatakanaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKSymbolsandPunctuationFirst, CJKSymbolsandPunctuationLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKUnifiedIdeographsFirst, CJKUnifiedIdeographsLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Noto Sans", "Noto Sans CJK JP", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HalfwidthandFullwidthFormsFirst, HalfwidthandFullwidthFormsLast);
 #elif defined(TARGET_PLATFORM_WINDOWS)
     RetroFuturaGUI::FontManager::LoadFont("Arial", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, BasicLatinFirst, BasicLatinLast);
     RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Arial", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, Latin1SupplementFirst, Latin1SupplementLast);
-    //RetroFuturaGUI::FontManager::ExtendFontset("Yu Mincho", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HiraganaFirst, HiraganaLast);
-    //RetroFuturaGUI::FontManager::ExtendFontset("Yu Mincho", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, KatakanaFirst, KatakanaLast);
+
+    //Japanese from Yu Mincho, which Windows ships; the kanji are rendered as they're first shown
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HiraganaFirst, HiraganaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, KatakanaFirst, KatakanaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKSymbolsandPunctuationFirst, CJKSymbolsandPunctuationLast); //、。「」 and 々, which repeats a kanji
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKUnifiedIdeographsFirst, CJKUnifiedIdeographsLast); //the kanji
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HalfwidthandFullwidthFormsFirst, HalfwidthandFullwidthFormsLast); //！？：（） and full-width letters
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, EmoticonsFirst, EmoticonsLast); //😀 and the other faces
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, MiscellaneousSymbolsAndPictographsFirst, MiscellaneousSymbolsAndPictographsLast); //👍 🌍 🍕
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, SupplementalSymbolsandPictographsFirst, SupplementalSymbolsandPictographsLast); //🤔 🦄 🥰
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 25, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, SymbolsandPictographsExtendedAFirst, SymbolsandPictographsExtendedALast); //🫠 and the Unicode 18 emoji
+
+    //Arial 18 is the file explorer's own font, so Japanese file names show there too
+    RetroFuturaGUI::FontManager::LoadFont("Arial", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, BasicLatinFirst, BasicLatinLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HiraganaFirst, HiraganaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, KatakanaFirst, KatakanaLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKSymbolsandPunctuationFirst, CJKSymbolsandPunctuationLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, CJKUnifiedIdeographsFirst, CJKUnifiedIdeographsLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Yu Mincho", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, HalfwidthandFullwidthFormsFirst, HalfwidthandFullwidthFormsLast);
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, EmoticonsFirst, EmoticonsLast); //😀 and the other faces
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, MiscellaneousSymbolsAndPictographsFirst, MiscellaneousSymbolsAndPictographsLast); //👍 🌍 🍕
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, SupplementalSymbolsandPictographsFirst, SupplementalSymbolsandPictographsLast); //🤔 🦄 🥰
+    RetroFuturaGUI::FontManager::ExtendFontset("Arial", "Segoe UI Emoji", 18, PlatformBridge::Fonts::Slant::Roman, PlatformBridge::Fonts::Weight::Regular, SymbolsandPictographsExtendedAFirst, SymbolsandPictographsExtendedALast); //🫠 and the Unicode 18 emoji
+
 #endif
     
 //This sets only the title the taskbar shows. The title drawn inside the window is the label in
@@ -155,7 +188,7 @@ void TestProject::MainWindow::setup(std::string_view windowTitle, const i32 widt
 
         framed->SetCornerRadii(glm::vec4(12.0f));
         framed->SetBorderWidth(1.0f);
-        framed->SetBorderColor(glm::vec4(0.35f, 0.35f, 0.45f, 1.0f), RetroFuturaGUI::ColorState::Enabled);
+        framed->SetBorderColors(std::array { glm::vec4(0.35f, 0.35f, 0.45f, 1.0f) }, RetroFuturaGUI::ColorState::Enabled);
     }
 
     //Both ways of docking from the start: the tab window docks to this window's right edge, 8 px away, where it takes this
