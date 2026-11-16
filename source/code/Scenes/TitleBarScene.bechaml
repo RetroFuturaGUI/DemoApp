@@ -1,0 +1,30 @@
+<!-- The window's title bar -->
+<Scene Name="TitleBarScene" ReservedEdge="Top" ReservedEdgeThickness=40.0 OnTitleChange=Slots.ShowTitle>
+    <Slot>void ShowTitle(std::string title)</Slot>
+    <Lasagna Name="RootLasagna" Rows=1 Columns=1 Layers=1>
+        <MenuBar Name="TitleBar" Row=0 Column=0 DockingEdge="Top">
+            <Background Colors=#14141FE6 FillType="Solid"/>
+            <Border Colors=#595973 Width=1.0/>
+
+            <Label Name="Title" FlexSizing="Star" Width=1.0 IsWindowDrag Size={ 400.0, 40.0, 0.01 }>
+                <Text String="RetroFuturaGUI Test" FontFamily="Arial" FontSize=18.0 Alignment="Left" Colors=#FFFFFF Padding=8.0/>
+            </Label>
+            <Button Name="MinimizeButton" FlexSizing="Square" OnClick=Window.Minimize Size={ 40.0, 38.0, 0.01 }>
+                <Background Colors:Enabled={ 0, 0, 0, 0 } Colors:Hover=#40405AFF Colors:Clicked=#595980FF FillType="Solid"/>
+                <Border Width=0.0/>
+                <Text String="_" FontFamily="Arial" FontSize=18.0 Alignment="Center" Colors=#FFFFFF/>
+            </Button>
+            <Button Name="MaximizeButton" FlexSizing="Square" OnClick=Window.Maximize Size={ 40.0, 38.0, 0.01 }>
+                <Background Colors:Enabled={ 0, 0, 0, 0 } Colors:Hover=#40405AFF Colors:Clicked=#595980FF FillType="Solid"/>
+                <Border Width=0.0/>
+                <Text String="□" FontFamily="Arial" FontSize=18.0 Alignment="Center" Colors=#FFFFFF/>
+            </Button>
+            <Button Name="CloseButton" FlexSizing="Square" OnClick=Window.CloseWindow Size={ 40.0, 38.0, 0.01 }>
+                <Background Colors:Enabled={ 0, 0, 0, 0 } Colors:Hover=#C42B1CFF Colors:Clicked=#A3261AFF FillType="Solid"
+                            CornerRadii={ 0.0, 11.0, 0.0, 0.0 }/>
+                <Border Width=0.0/>
+                <Text String="×" FontFamily="Arial" FontSize=18.0 Alignment="Center" Colors=#FFFFFF/>
+            </Button>
+        </MenuBar>
+    </Lasagna>
+</Scene>

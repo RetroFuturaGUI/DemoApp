@@ -1,0 +1,16 @@
+<!-- The main menu: navigation to all featured scenes -->
+<Scene Name="MainScene">
+    <Lasagna Name="RootLasagna" Rows=5 Columns=3 Layers=1>
+        <Button Name="ColorfulPopButton" Row=1 Column=1 OnClick=Scenes.ColorfulPopScene>
+            <Text String="ColorfulPop" FontFamily="Arial" FontSize=20.0 Alignment="Center" Colors=#FFFFFF/>
+            <Background Colors:Enabled=#2A2A3A Colors:Hover=#3A3A55 Colors:Clicked=#4A4A70 FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors=#7070A0 Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+
+        <Button Name="NoteButton" Row=2 Column=1 OnClick=Scenes.NoteScene>
+            <Text String="Note" FontFamily="Arial" FontSize=20.0 Alignment="Center" Colors=#FFFFFF/>
+            <Background Colors:Enabled=#2A2A3A Colors:Hover=#3A3A55 Colors:Clicked=#4A4A70 FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors=#7070A0 Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+    </Lasagna>
+</Scene>

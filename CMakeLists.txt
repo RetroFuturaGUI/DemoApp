@@ -1,10 +1,12 @@
-cmake_minimum_required(VERSION 3.16..)
+# >>> Roux: project. Rewritten on every Generate. Change Project.bechaml Instead!!1!
+cmake_minimum_required(VERSION 3.16)
+project("TestProject" VERSION 0.1.0)
+include("${CMAKE_CURRENT_SOURCE_DIR}/source/generated/Project.cmake")
+# <<< Roux
 
 message(STATUS "-- RetroFuturaGUI TestProject CMake Configuration")
 #set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "")
 message(STATUS "CMAKE_TOOLCHAIN_FILE: ${CMAKE_TOOLCHAIN_FILE}")
-
-project("TestProject" VERSION 0.1.0)
 
 if(NOT DEFINED TARGETPLATFORM)
     if(WIN32)
@@ -17,9 +19,6 @@ endif()
 message(STATUS "-- Target Platform: ${TARGETPLATFORM}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-set(CMAKE_CXX_EXTENSIONS OFF)
 
 # Before the targets on purpose: add_compile_options only reaches targets created after it.
 # /utf-8 reads sources and writes narrow literals as UTF-8 - and it's what makes std::print hand
@@ -28,64 +27,24 @@ if(MSVC)
     add_compile_options(/utf-8)
 endif()
 
-if(DEFINED LANG AND LANG)
-    message(STATUS "-- Target Lang: ${LANG}")
-    message(STATUS "-- Building a library")
-    add_library(TestProject SHARED
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/main.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/MainWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/SecondaryWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/TabWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/NoteWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/MainScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/MenuBarScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/CustomMenuBarScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/EnvironmentScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/ScrollViewScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/PopupScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/TabScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/NoteScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/MainScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/EnvironmentScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/ScrollViewScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/PopupScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/TabScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/NoteScene.cpp"
-    )
-    set_target_properties(TestProject PROPERTIES OUTPUT_NAME "TestProjectNative")
-    set(DYNLIB_MODE ON CACHE BOOL "Build as a dynamic library")
-    add_definitions(-DDYNLIB_MODE) #needs to be globally available
+# >>> Roux: target. Rewritten on every Generate. The files come from source/code/ and source/generated/.
+if(ROUX_DYNLIB)
+    add_library("TestProject" SHARED ${ROUX_SOURCES})
+    set_target_properties("TestProject" PROPERTIES OUTPUT_NAME "TestProjectNative")
 else()
-    message(STATUS "-- Target Lang: C++")
-    message(STATUS "-- Building as an executable")
-    add_executable("TestProject"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/main.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/MainWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/SecondaryWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/TabWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows/NoteWindow_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/MainScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/MenuBarScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/CustomMenuBarScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/EnvironmentScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/ScrollViewScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/PopupScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/TabScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes/NoteScene_setup.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/MainScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/EnvironmentScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/ScrollViewScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/PopupScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/TabScene.cpp"
-        "${CMAKE_CURRENT_SOURCE_DIR}/source/code/NoteScene.cpp"
-    )
-
+    add_executable("TestProject" ${ROUX_SOURCES})
+    #<!--
     # MSVC only: sets the process codepage to UTF-8 so narrow paths work - see app.manifest.
     # Linux needs nothing; paths there are raw bytes the kernel never transcodes.
     if(MSVC)
         target_sources("TestProject" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/app.manifest")
     endif()
+    #-->
 endif()
+
+target_include_directories("TestProject" PRIVATE ${ROUX_INCLUDE_DIRECTORIES})
+target_compile_options("TestProject" PRIVATE ${ROUX_COMPILE_OPTIONS})
+# <<< Roux
 
 string(TOLOWER "${TARGETPLATFORM}" TARGETPLATFORM_LOWER)
 
@@ -103,43 +62,35 @@ else()
     message(WARNING "Unknown TARGETPLATFORM '${TARGETPLATFORM}'. clangd will not get platform-specific defines.")
 endif()
 
-if(MSVC)
-    add_compile_options(/W4 /WX)
+# >>> Roux: library. Rewritten on every Generate.
+# The same flags reach RetroFuturaGUI and what it builds, which set none of their own.
+add_compile_options(${ROUX_COMPILE_OPTIONS})
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RetroFuturaGUI")
+target_link_libraries("TestProject" PRIVATE "RetroFuturaGUI")
+# <<< Roux
+
+# >>> Roux: assets. Rewritten on every Generate; the asset folders are listed in Project.bechaml.
+# Copied on every build, after the program, so a changed asset or shader arrives even when the program isn't rebuilt.
+if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.26)
+    set(ROUX_COPY_DIRECTORY copy_directory_if_different)
 else()
-    # GCC doesn't support -Wunused-includes; only enable when using Clang
-    if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        add_compile_options(-Wall -Wextra -Werror -Wreturn-type -Wunused-includes)
-    else()
-        add_compile_options(-Wall -Wextra -Werror -Wreturn-type)
-    endif()
+    set(ROUX_COPY_DIRECTORY copy_directory)
 endif()
 
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RetroFuturaGUI")
-
-target_include_directories("TestProject" PRIVATE
-    "${CMAKE_CURRENT_SOURCE_DIR}/source"
-    "${CMAKE_CURRENT_SOURCE_DIR}/source/code"
-    "${CMAKE_CURRENT_SOURCE_DIR}/source/generated"
-    "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl"
-    "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Windows"
-    "${CMAKE_CURRENT_SOURCE_DIR}/source/generated/impl/Scenes"
-)
-
-target_link_libraries("TestProject" PRIVATE
-    "RetroFuturaGUI"
-)
-
-add_custom_command(TARGET "TestProject" POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
+add_custom_target("TestProjectAssets" ALL
+    COMMAND ${CMAKE_COMMAND} -E ${ROUX_COPY_DIRECTORY}
         "${CMAKE_CURRENT_SOURCE_DIR}/RetroFuturaGUI/source/Shaders/ShaderSource"
         "$<TARGET_FILE_DIR:TestProject>/ShaderSource"
-)
-
-add_custom_command(TARGET "TestProject" POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory
+    COMMAND ${CMAKE_COMMAND} -E ${ROUX_COPY_DIRECTORY}
         "${CMAKE_CURRENT_SOURCE_DIR}/RetroFuturaGUI/Resources"
         "$<TARGET_FILE_DIR:TestProject>/Resources"
+    COMMAND ${CMAKE_COMMAND} -E ${ROUX_COPY_DIRECTORY}
+        "${CMAKE_CURRENT_SOURCE_DIR}/Resources"
+        "$<TARGET_FILE_DIR:TestProject>/Assets"
+    VERBATIM
 )
+add_dependencies("TestProjectAssets" "TestProject")
+# <<< Roux
 
 if(LANG MATCHES "CSharp")
     add_custom_command(TARGET TestProject
@@ -157,7 +108,7 @@ if(LANG MATCHES "CSharp")
 
     add_custom_command(TARGET TestProject POST_BUILD
         COMMAND ${CMAKE_COMMAND}
-                -DSOURCE_DIR="${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}"
+                -DSOURCE_DIR="$<TARGET_FILE_DIR:TestProject>" #where the library and the decoder helper land, with any generator
                 -DDEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/source/code/CSharpProject/bin/${CMAKE_BUILD_TYPE}/net8.0"
                 -P "${CMAKE_CURRENT_SOURCE_DIR}/copy_script.cmake"
         COMMENT "Copying build output (including subfolders) to C# directory..."
@@ -179,7 +130,7 @@ LANG MATCHES "Rust")
 elseif(LANG MATCHES "Python")
     add_custom_command(TARGET TestProject POST_BUILD
         COMMAND ${CMAKE_COMMAND}
-                -DSOURCE_DIR="${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}"
+                -DSOURCE_DIR="$<TARGET_FILE_DIR:TestProject>" #where the library and the decoder helper land, with any generator
                 -DDEST_DIR="${CMAKE_CURRENT_SOURCE_DIR}/source/code/Python"
                 -P "${CMAKE_CURRENT_SOURCE_DIR}/copy_script.cmake"
         COMMENT "Copying build output (including subfolders) to Python directory..."
@@ -189,23 +140,3 @@ elseif(LANG MATCHES "Python")
         "${CMAKE_CURRENT_SOURCE_DIR}/source/code/Python/RetroFuturaGuiBinding.py"
     )
 endif()
-
-
-#exe mode Windows:
-#run cmake (DEBUG):   & "C:\Program Files\CMake\bin\cmake.exe" -S .. -G Ninja -DTARGETPLATFORM=x64-windows -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Debug   -B x64-windows
-#run cmake (RELEASE): & "C:\Program Files\CMake\bin\cmake.exe" -S .. -G Ninja -DTARGETPLATFORM=x64-windows -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -B x64-windows
-#build: & "C:\Program Files\CMake\bin\cmake.exe" --build x64-windows
-#run: x64-windows/Debug/TestProject.exe
-
-#exe mode Linux:
-#run cmake (DEBUG):   cmake -S .. -G Ninja -DTARGETPLATFORM=x64-Linux -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Debug   -B x64-Linux
-#run cmake (RELEASE): cmake -S .. -G Ninja -DTARGETPLATFORM=x64-Linux -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -B x64-Linux
-#build: cmake --build x64-Linux
-#run: ./x64-Linux/TestProject
-
-#dll mode Windows:
-#run cmake (DEBUG):   & "C:\Program Files\CMake\bin\cmake.exe" -S .. -G Ninja -DTARGETPLATFORM=x64-windows -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Debug   -DLANG=<LANG> -B x64-windows
-#run cmake (RELEASE): & "C:\Program Files\CMake\bin\cmake.exe" -S .. -G Ninja -DTARGETPLATFORM=x64-windows -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DCMAKE_BUILD_TYPE=Release -DLANG=<LANG> -B x64-windows
-#build: & "C:\Program Files\CMake\bin\cmake.exe" --build x64-windows
-
-#replace <LANG> with CSharp, Python or Rust

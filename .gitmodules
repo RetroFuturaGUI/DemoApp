@@ -1,3 +1,9 @@
 [submodule "RetroFuturaGUI"]
 	path = RetroFuturaGUI
 	url = https://github.com/RetroFuturaGUI/RetroFuturaGUI
+[submodule ".bechaml"]
+	path = .bechaml
+	url = https://github.com/RetroFuturaGUI/.bechaml.git
+[submodule "Roux"]
+	path = Roux
+	url = https://github.com/RetroFuturaGUI/Roux.git

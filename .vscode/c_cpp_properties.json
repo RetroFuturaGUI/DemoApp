@@ -25,7 +25,7 @@
             "cStandard": "c23",
             "cppStandard": "c++23",
             "intelliSenseMode": "windows-msvc-x64",
-            "compileCommands": "${workspaceFolder}/build/x64-windows/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/Windows-Debug/compile_commands.json"
         },
         {
             "name": "Win64",
@@ -54,7 +54,7 @@
             "cStandard": "c23",
             "cppStandard": "c++23",
             "intelliSenseMode": "windows-msvc-x64",
-            "compileCommands": "${workspaceFolder}/build/x64-windows/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/Windows-Debug/compile_commands.json"
         },
         {
             "name": "Linux",
@@ -68,7 +68,7 @@
             "cStandard": "c23",
             "cppStandard": "c++23",
             "intelliSenseMode": "linux-gcc-x64",
-            "compileCommands": "${workspaceFolder}/build/x64-Linux/compile_commands.json"
+            "compileCommands": "${workspaceFolder}/build/Linux-Debug/compile_commands.json"
         }
     ],
     "version": 4

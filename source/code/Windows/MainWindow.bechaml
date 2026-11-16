@@ -1,0 +1,18 @@
+<!-- The test app's one window: the title bar docked at the top, and below it the main menu or the scene it loads. -->
+<Window Name="MainWindow" Title="RetroFuturaGUI Test" Width=1280 Height=720 Perspective=900.0>
+
+    <!-- Halftone dots, black, growing toward the bottom right and drifting slowly. -->
+    <Background Colors={ #3F5BFF, #9420FF, #FF2E9A }
+                FillType="LinearShift"
+                GradientAnimationSpeed=0.12
+                GradientRotationSpeed=6.0
+                RasterPattern="Dotted" PrimaryRasterColor={ 0.0, 0.0, 0.0, 0.6 } RasterSpacing=6.0 RasterDegree=220.0
+                PrimaryRasterWidthTransfer={ 0.0, 0.0, 0.0, 3.0, 9.0, 16.0 } RasterAnimationSpeed=4.0
+                CornerRadii={ 12.0, 12.0, 12.0, 12.0 }/>
+    <Border Colors=#595973 Width=1.0 CornerRadii={ 12.0, 12.0, 12.0, 12.0 }/>
+
+    <Scene Name="TitleBarScene" Start/>
+    <Scene Name="MainScene" Start/>
+    <Scene Name="ColorfulPopScene"/>
+    <Scene Name="NoteScene"/>
+</Window>

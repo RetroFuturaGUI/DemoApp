@@ -1,0 +1,115 @@
+<!-- The ColorfulPop scene: Inspired by the Coloful Pop Aesthetic as known as in several video games and Anime Intros/Outros -->
+<Scene Name="ColorfulPopScene" Title="Colorful Pop" OnLoad=Slots.ShowText OnUpdate=Slots.MoveBars>
+    <Slot>void ShowText()</Slot>
+    <Slot>void ShowBars()</Slot>
+    <Slot>void ShowColor()</Slot>
+    <Slot>void MoveBars()</Slot>
+    <Slot>void PaintHair()</Slot>
+
+    <Lasagna Name="RootLasagna"
+             Rows={ 0.06, 0.2, 0.2, 0.2, 0.2, 0.08, 0.06 }
+             Columns={ 0.03, 0.33, 0.02, 0.24, 0.03, 0.32, 0.03 }
+             Layers=8>
+        <!-- Layer 0 is in front. 0 to 2: the content; 3: the panel behind the left area; 4: free; 5: the frame; 6: free; 7: the
+             striped mask over the window's background. -->
+
+        <MultilineTextBox Name="TextPanel" Row=1 Column=1 RowSpan=4 Layer=0 SizingMode="FIXED" Size={ 400.0, 300.0, 0.01 } RotateY=40.0>
+            <Background Colors:Enabled=#555588FF Colors:Hover=#555588FF Colors:Clicked=#555588FF FillType="Solid" CornerRadii={ 10.0, 10.0, 10.0, 10.0 }>
+                <DropShadow Shown Colors=#111111 Distance=12.0 Degree=-45.0 Blur=0.0/>
+            </Background>
+            <Border Colors=#111111 Width=5.0 CornerRadii={ 10.0, 10.0, 10.0, 10.0 }/>
+            <Text String="Jalapeño 🌶️, Paloma 🕊️\nCoração 💜, Olá 👋🏽\nแมว 🐈‍⬛, ศักดิ์สิทธิ์ ☘️\n大山猫 🐱, あぢさゐ 🌺\n𰻝𰻝面 🍜, ⻱龜亀龟 🐢\nFußgängerübergänge 🚶🏽"
+                  FontFamily="Rounded Mplus 1c" FontSize=24.0 FontWeight="Bold" Alignment="Left" Padding=16.0
+                  FillType="RadialShift" GradientAnimationSpeed=0.18 GradientRotationSpeed=12.0
+                  Colors:Enabled={ { 0.25, 0.6, 1.0, 1.0 }, { 1.0, 0.3, 0.65, 1.0 }, { 1.0, 0.85, 0.2, 1.0 } }
+                  Colors:Hover={ { 0.25, 0.6, 1.0, 1.0 }, { 1.0, 0.3, 0.65, 1.0 }, { 1.0, 0.85, 0.2, 1.0 } }
+                  Colors:Clicked={ { 0.25, 0.6, 1.0, 1.0 }, { 1.0, 0.3, 0.65, 1.0 }, { 1.0, 0.85, 0.2, 1.0 } }>
+                <!-- As the Note scene's outline button sets it: dark blue, 3 px around every glyph. -->
+                <Outline Colors:Enabled={ 0.05, 0.05, 0.2, 1.0 } Colors:Hover={ 0.05, 0.05, 0.2, 1.0 } Colors:Clicked={ 0.05, 0.05, 0.2, 1.0 } Width=3.0/>
+            </Text>
+            <Placeholder String="Type something poppy..." Colors={ 0.55, 0.5, 0.65 }/>
+            <Caret Colors=#FF2E9A BlinkTime=650.0/>
+        </MultilineTextBox>
+
+        <Histogram Name="Bars" Row=1 Column=1 RowSpan=4 Layer=1 SizingMode="FIXED" Size={ 400.0, 300.0, 0.01 } RotateY=40.0 BarInterstice=6.0>
+            <Background Colors={ 0.35, 0.12, 0.75, 0.9 } FillType="Solid" CornerRadii={ 12.0, 12.0, 12.0, 12.0 }>
+                <DropShadow Shown Colors=#111111 Distance=10.0 Degree=-45.0 Blur=0.0/>
+            </Background>
+            <Border Colors=#111111 Width=4.0 CornerRadii={ 12.0, 12.0, 12.0, 12.0 }/>
+            <Indicator Shown=False/>
+            <Graph Shown Colors={ #22C7F0, #FF2E9A, #FFD21F } FillType="LinearShift" GradientDegree=90.0 GradientAnimationSpeed=0.25/>
+        </Histogram>
+
+        <ColorPicker Name="Picker" Row=1 Column=1 RowSpan=4 Layer=2 SizingMode="FIXED" Size={ 320.0, 320.0, 0.01 } OnColorChanged=Slots.PaintHair>
+            <Border Colors={ #111111 } Colors:Hover={ 0.05, 0.05, 0.2, 1.0 } Colors:Clicked={ 0.05, 0.05, 0.2, 1.0 } Width=4.0/>
+        </ColorPicker>
+
+        <SvgImage Name="Panel" Row=0 Column=0 RowSpan=7 ColSpan=2 Layer=3 SvgImagePath="Assets/Images/panel.svg"
+                  SizingMode="FILL" ImageFit="Stretch"/>
+
+        <SvgImage Name="Lawnmeower" Row=1 Column=3 RowSpan=4 Layer=0 SvgImagePath="Assets/Images/lawnmeower.svg"
+                  SizingMode="FIXED" Size={ 300.0, 424.0, 0.01 }/>
+
+        <SvgImage Name="Frame" Row=0 Column=0 RowSpan=7 ColSpan=7 Layer=5 SvgImagePath="Assets/Images/trauerrahmen.svg"
+                  SizingMode="FILL" Padding=-12.0 ImageFit="Stretch"/>
+
+        <SvgImage Name="BackgroundMask" Row=0 Column=0 RowSpan=7 ColSpan=7 Layer=7 SvgImagePath="Assets/Images/bgmask.svg"
+                  SizingMode="FILL" Padding=-20.0 ImageFit="Stretch"/>
+
+        <Button Name="TextButton" Row=1 Column=5 SizingMode="FIXED" Size={ 380.0, 88.0, 0.01 } RotateY=-20.0 OnClick=Slots.ShowText>
+            <Background Colors:Enabled={ #5CE1FF, #22C7F0, #2E6BFF } Colors:Hover={ #7FE8FF, #3FD0F5, #4A80FF } Colors:Clicked={ #22C7F0, #1A9FD0, #2050D0 }
+                        FillType="LinearShift" GradientDegree=0.0 Skew=12.0
+                        RasterPattern="Dotted" PrimaryRasterColor={ 0.07, 0.07, 0.07, 0.7 } RasterSpacing=4.0 RasterDegree=30.0
+                        PrimaryRasterWidthTransfer={ 0.0, 0.0, 0.0, 1.5, 4.0, 7.0, 9.0 } RasterAnimationSpeed:Hover=-24.0 RasterAnimationSpeed:Clicked=-24.0>
+                <DropShadow Shown Colors=#111111 Distance=9.0 Degree=-45.0 Blur=0.0/>
+            </Background>
+            <Border Colors=#111111 Width=4.0 Skew=12.0/>
+            <Text String="TEXT" FontFamily="Rounded Mplus 1c" FontSize=32.0 FontWeight="Black" Alignment="Center" Colors=#FFFFFF>
+                <Outline Colors=#111111 Width=3.0/>
+                <DropShadow Shown Colors=#111111 Distance=4.0 Degree=-45.0 Blur=0.0/>
+            </Text>
+        </Button>
+
+        <Button Name="BarsButton" Row=2 Column=5 SizingMode="FIXED" Size={ 380.0, 88.0, 0.01 } RotateY=-20.0 OnClick=Slots.ShowBars>
+            <Background Colors:Enabled={ #FFFFFF, #F2F2F7, #DADAE6 } Colors:Hover={ #FFFFFF, #FFFFFF, #E8E8F2 } Colors:Clicked={ #E0E0EA, #D0D0DD, #BCBCCC }
+                        FillType="LinearShift" GradientDegree=0.0 Skew=12.0
+                        RasterPattern="Dotted" PrimaryRasterColor={ 0.07, 0.07, 0.07, 0.7 } RasterSpacing=4.0 RasterDegree=30.0
+                        PrimaryRasterWidthTransfer={ 0.0, 0.0, 0.0, 1.5, 4.0, 7.0, 9.0 } RasterAnimationSpeed:Hover=-24.0 RasterAnimationSpeed:Clicked=-24.0>
+                <DropShadow Shown Colors=#111111 Distance=9.0 Degree=-45.0 Blur=0.0/>
+            </Background>
+            <Border Colors=#111111 Width=4.0 Skew=12.0/>
+            <Text String="HISTOGRAM" FontFamily="Rounded Mplus 1c" FontSize=32.0 FontWeight="Black" Alignment="Center" Colors=#FFFFFF>
+                <Outline Colors=#111111 Width=3.0/>
+                <DropShadow Shown Colors=#111111 Distance=4.0 Degree=-45.0 Blur=0.0/>
+            </Text>
+        </Button>
+
+        <Button Name="ColorButton" Row=3 Column=5 SizingMode="FIXED" Size={ 380.0, 88.0, 0.01 } RotateY=-20.0 OnClick=Slots.ShowColor>
+            <Background Colors:Enabled={ #FFE45C, #FFD21F, #FF9F1C } Colors:Hover={ #FFEC85, #FFDB4D, #FFB347 } Colors:Clicked={ #FFD21F, #F0B800, #E08800 }
+                        FillType="LinearShift" GradientDegree=0.0 Skew=12.0
+                        RasterPattern="Dotted" PrimaryRasterColor={ 0.07, 0.07, 0.07, 0.7 } RasterSpacing=4.0 RasterDegree=30.0
+                        PrimaryRasterWidthTransfer={ 0.0, 0.0, 0.0, 1.5, 4.0, 7.0, 9.0 } RasterAnimationSpeed:Hover=-24.0 RasterAnimationSpeed:Clicked=-24.0>
+                <DropShadow Shown Colors=#111111 Distance=9.0 Degree=-45.0 Blur=0.0/>
+            </Background>
+            <Border Colors=#111111 Width=4.0 Skew=12.0/>
+            <Text String="COLOR" FontFamily="Rounded Mplus 1c" FontSize=32.0 FontWeight="Black" Alignment="Center" Colors=#FFFFFF>
+                <Outline Colors=#111111 Width=3.0/>
+                <DropShadow Shown Colors=#111111 Distance=4.0 Degree=-45.0 Blur=0.0/>
+            </Text>
+        </Button>
+
+        <Button Name="MenuButton" Row=4 Column=5 SizingMode="FIXED" Size={ 380.0, 88.0, 0.01 } RotateY=-20.0 OnClick=Scenes.MainScene>
+            <Background Colors:Enabled={ #FF62B8, #FF2E9A, #C21DFF } Colors:Hover={ #FF85C8, #FF4FAD, #D04AFF } Colors:Clicked={ #FF2E9A, #E0157F, #A010E0 }
+                        FillType="LinearShift" GradientDegree=0.0 Skew=12.0
+                        RasterPattern="Dotted" PrimaryRasterColor={ 0.07, 0.07, 0.07, 0.7 } RasterSpacing=4.0 RasterDegree=30.0
+                        PrimaryRasterWidthTransfer={ 0.0, 0.0, 0.0, 1.5, 4.0, 7.0, 9.0 } RasterAnimationSpeed:Hover=-24.0 RasterAnimationSpeed:Clicked=-24.0>
+                <DropShadow Shown Colors=#111111 Distance=9.0 Degree=-45.0 Blur=0.0/>
+            </Background>
+            <Border Colors=#111111 Width=4.0 Skew=12.0/>
+            <Text String="MAIN MENU" FontFamily="Rounded Mplus 1c" FontSize=32.0 FontWeight="Black" Alignment="Center" Colors=#FFFFFF>
+                <Outline Colors=#111111 Width=3.0/>
+                <DropShadow Shown Colors=#111111 Distance=4.0 Degree=-45.0 Blur=0.0/>
+            </Text>
+        </Button>
+    </Lasagna>
+</Scene>

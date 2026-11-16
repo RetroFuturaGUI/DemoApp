@@ -1,0 +1,15 @@
+#pragma once
+#include "MainScene_p.hpp"
+
+namespace TestProject
+{
+    class MainScene final : public MainScene_p
+    {
+    public:
+        explicit MainScene(RetroFuturaGUI::Window* parentWindow) : MainScene_p(parentWindow) {}
+
+    privateSlots:
+        void LoadColorfulPopScene() override;
+        void LoadNoteScene() override;
+    };
+}

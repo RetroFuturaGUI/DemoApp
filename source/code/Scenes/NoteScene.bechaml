@@ -1,0 +1,114 @@
+<!-- A multiline text box to type into. Several scripts, text flow directions, and text decorations can be tested -->
+<Scene Name="NoteScene">
+    <Slot>void SwitchFill()</Slot>
+    <Slot>void SwitchRaster()</Slot>
+    <Slot>void SwitchFog()</Slot>
+    <Slot>void SwitchGlass()</Slot>
+    <Slot>void SwitchMetal()</Slot>
+    <Slot>void SwitchOutline()</Slot>
+    <Slot>void ShowEffectsSample()</Slot>
+    <Slot>void ShowEmojiSample()</Slot>
+    <Slot>void ShowKanjiSample()</Slot>
+    <Slot>void ShowThaiSample()</Slot>
+    <Slot>void ShowMixedSample()</Slot>
+    <Slot>void ShowRightToLeftSample()</Slot>
+    <Slot>void ShowVerticalSample()</Slot>
+
+    <Lasagna Name="RootLasagna"
+             Rows={ 0.02, 0.08, 0.01, 0.08, 0.02, 0.67, 0.02, 0.08, 0.02 }
+             Columns={ 0.03, 0.1343, 0.1343, 0.1343, 0.1343, 0.1343, 0.1343, 0.1343, 0.03 }
+             Layers=1>
+
+        <Button Name="FillButton" Row=1 Column=1 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.SwitchFill>
+            <Text String="Solid" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="RasterButton" Row=1 Column=2 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.SwitchRaster>
+            <Text String="Raster" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="FogButton" Row=1 Column=3 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.SwitchFog>
+            <Text String="Fog" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="GlassButton" Row=1 Column=4 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.SwitchGlass>
+            <Text String="Glass" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="MetalButton" Row=1 Column=5 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.SwitchMetal>
+            <Text String="Metal" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="OutlineButton" Row=1 Column=6 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.SwitchOutline>
+            <Text String="Outline" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+
+        <!-- The sample buttons. The note starts with the effects' names, so that one starts out on. -->
+        <Button Name="EffectsSampleButton" Row=3 Column=1 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowEffectsSample>
+            <Text String="Effects" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.25, 0.45, 0.85 } Colors:Hover={ 0.3, 0.52, 0.95 } Colors:Clicked={ 0.35, 0.6, 1.0 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="EmojiSampleButton" Row=3 Column=2 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowEmojiSample>
+            <Text String="Emoji" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="KanjiSampleButton" Row=3 Column=3 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowKanjiSample>
+            <Text String="Kanji" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="ThaiSampleButton" Row=3 Column=4 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowThaiSample>
+            <Text String="Thai" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="MixedSampleButton" Row=3 Column=5 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowMixedSample>
+            <Text String="Mixed" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="RightToLeftSampleButton" Row=3 Column=6 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowRightToLeftSample>
+            <Text String="RTL" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+        <Button Name="VerticalSampleButton" Row=3 Column=7 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Slots.ShowVerticalSample>
+            <Text String="Vertical" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+
+        <MultilineTextBox Name="NoteTextBox" Row=5 Column=1 ColSpan=7 SizingMode="FILL_XY">
+            <Background Colors:Enabled={ 0.12, 0.12, 0.16 } Colors:Hover={ 0.15, 0.15, 0.2 } Colors:Clicked={ 0.15, 0.15, 0.2 } Colors:Disabled={ 0.08, 0.08, 0.1 }
+                        CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors:Enabled={ 0.35, 0.35, 0.45 } Colors:Hover={ 0.45, 0.45, 0.6 } Colors:Clicked={ 0.55, 0.55, 0.75 } Width=1.0
+                    CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Text String="RetroFuturaGUI\nText effects\nFill, raster, fog\nGlass, metal, outline"
+                  FontFamily="Arial" FontSize=40.0 FontUnit="Points" Alignment="Left" Padding=8.0
+                  Colors:Enabled={ { 0.25, 0.6, 1.0, 1.0 }, { 1.0, 0.3, 0.65, 1.0 }, { 1.0, 0.85, 0.2, 1.0 } }
+                  Colors:Hover={ { 0.25, 0.6, 1.0, 1.0 }, { 1.0, 0.3, 0.65, 1.0 }, { 1.0, 0.85, 0.2, 1.0 } }
+                  Colors:Clicked={ { 0.25, 0.6, 1.0, 1.0 }, { 1.0, 0.3, 0.65, 1.0 }, { 1.0, 0.85, 0.2, 1.0 } }
+                  GradientAnimationSpeed=0.18 GradientRotationSpeed=12.0
+                  RasterPattern="Dotted" PrimaryRasterColor={ 0.05, 0.05, 0.1, 0.9 } RasterSpacing=2.0 RasterDegree=35.0
+                  DotTransparencyTransfer=0.4 RasterAnimationSpeed=-3.0
+                  FogAlpha=0.8 FogSpeed=7.2 FogClearing=0.1/>
+            <Placeholder String="Type here..." Colors={ 0.5, 0.5, 0.55 }/>
+            <Caret Colors={ 0.85, 0.85, 0.9 } BlinkTime=750.0/>
+        </MultilineTextBox>
+
+        <Button Name="BackButton" Row=7 Column=7 SizingMode="FILL_X" Size={ 110.0, 36.0, 0.01 } OnClick=Scenes.MainScene>
+            <Text String="Back" FontFamily="Arial" FontSize=15.0 FontUnit="Points" Alignment="Center"/>
+            <Background Colors:Enabled={ 0.2, 0.2, 0.25 } Colors:Hover={ 0.28, 0.28, 0.35 } Colors:Clicked={ 0.36, 0.36, 0.45 } FillType="Solid" CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+            <Border Colors={ 0.35, 0.35, 0.45 } Width=1.0 CornerRadii={ 8.0, 8.0, 8.0, 8.0 }/>
+        </Button>
+    </Lasagna>
+</Scene>

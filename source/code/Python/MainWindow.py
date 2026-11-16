@@ -9,6 +9,5 @@ class MainWindow:
         print("This is a function written in Python!")
 
     def setup(self):
-        # Wrap the instance method to accept the extra argument
-        callback = lambda data: self.onButtonClick()
-        self.binding.ConnectSlot("MainWindow/testButton", callback, self.binding.WidgetAction.OnClick, False)
+        # Widgets are named by their full path. window, scene, container, widget
+        self.binding.ConnectSlot("SecondaryWindow/ScrollViewScene/RootContainer/TestButton", self.onButtonClick, self.binding.WidgetAction.OnClick, False)

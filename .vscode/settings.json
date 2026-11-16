@@ -1,11 +1,14 @@
 {
     "cmake.generator": "Ninja",
-    "cmake.buildDirectory": "${workspaceFolder}/build/x64-windows",
+    "cmake.buildDirectory": "${workspaceFolder}/build/Windows-Debug",
+    "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
+    "cmake.automaticReconfigure": false,
     "cmake.configureSettings": {
         "CMAKE_TOOLCHAIN_FILE": "${env:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
     },
     "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
-    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/x64-windows/compile_commands.json",
+    "C_Cpp.default.compileCommands": "${workspaceFolder}/build/Windows-Debug/compile_commands.json",
     "C_Cpp.default.compilerPath": "cl.exe",
     "C_Cpp.default.compilerArgs": [
         "/std:c++latest",
@@ -21,8 +24,8 @@
     "clangd.path": "clangd",
     "clangd.arguments": [
         "--background-index",
-        "--compile-commands-dir=${workspaceFolder}/build/x64-windows",
-        "--query-driver=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/cl.exe"
+        "--compile-commands-dir=${workspaceFolder}/build/Windows-Debug",
+        "--query-driver=C:/Program Files/Microsoft Visual Studio/**/cl.exe"
     ],
     "clangd.enabled": true,
     "C_Cpp.intelliSenseEngine": "disabled",

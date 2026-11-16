@@ -1,0 +1,26 @@
+<Project>
+    <Name>"TestProject"</Name>
+    <Identifier>""</Identifier>
+    <Version>"0.1.0"</Version>
+    <CMakeVersion>"3.16"</CMakeVersion>
+    <Platforms>{ "Windows", "Linux" }</Platforms>
+
+    <Windows>
+        <Language Name="C++" Standard="23"/>
+        <Compiler>"MSVC"</Compiler>
+        <CompilerFlags>{ "Wall", "Werror" }</CompilerFlags>
+    </Windows>
+    <Linux>
+        <Language Name="C++" Standard="23"/>
+        <Compiler>"GCC"</Compiler>
+        <CompilerFlags>{ "Wall", "Wextra", "Werror" }</CompilerFlags>
+    </Linux>
+    <AllowNonRoyaltyFreeCodecs>False</AllowNonRoyaltyFreeCodecs>
+    <Features>{ "Video", "Audio", "TrackerModules", "Models" }</Features>
+    <AppSettings>"App/App.bechaml"</AppSettings>
+    <StartWindow>"source/code/Windows/MainWindow.bechaml"</StartWindow>
+    <Assets>{ "Resources" }</Assets>
+    <Authors>{ "Lawn Meower" }</Authors>
+    <License>"Proprietary"</License>
+    <RemovedSlots>"CommentOut"</RemovedSlots>
+</Project>
