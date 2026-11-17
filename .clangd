@@ -32,7 +32,7 @@ CompileFlags:
     - -I${workspaceFolder}/build/x64-windows/RetroFuturaGUI/Debug
     - -I${workspaceFolder}/build/x64-windows/RetroFuturaGUI/PlatformBridge/Debug
     - -I${workspaceFolder}/build/x64-windows/RetroFuturaGUI/RetroFuturaGUI.dir/Debug
-    - -I${workspaceFolder}/build/x64-windows/TestProject.dir/Debug
+    - -I${workspaceFolder}/build/x64-windows/DemoApp.dir/Debug
   CompilationDatabase: build/x64-windows
   # Do not remove Linux defines here. If you switch to a Linux build, clangd
   # should use the active compile database or a Linux-specific config instead.

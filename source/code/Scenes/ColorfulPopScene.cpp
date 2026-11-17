@@ -2,12 +2,12 @@
 #include <cmath>
 #include <span>
 
-void TestProject::ColorfulPopScene::ShowText()
+void DemoApp::ColorfulPopScene::ShowText()
 {
     showView(View::Text);
 }
 
-void TestProject::ColorfulPopScene::ShowBars()
+void DemoApp::ColorfulPopScene::ShowBars()
 {
     if(!_bars)
         return;
@@ -17,12 +17,12 @@ void TestProject::ColorfulPopScene::ShowBars()
     showView(View::Bars);
 }
 
-void TestProject::ColorfulPopScene::ShowColor()
+void DemoApp::ColorfulPopScene::ShowColor()
 {
     showView(View::Color);
 }
 
-void TestProject::ColorfulPopScene::MoveBars()
+void DemoApp::ColorfulPopScene::MoveBars()
 {
     if(!_rootLasagna)
         return;
@@ -45,7 +45,7 @@ void TestProject::ColorfulPopScene::MoveBars()
     _bars->SetData(std::span<const f32>(_barValues), false);
 }
 
-void TestProject::ColorfulPopScene::PaintHair()
+void DemoApp::ColorfulPopScene::PaintHair()
 {
     if(!_picker)
         return;
@@ -64,12 +64,12 @@ void TestProject::ColorfulPopScene::PaintHair()
     });
 }
 
-void TestProject::ColorfulPopScene::LoadMainScene()
+void DemoApp::ColorfulPopScene::LoadMainScene()
 {
     loadScene("MainScene");
 }
 
-void TestProject::ColorfulPopScene::showView(const View view)
+void DemoApp::ColorfulPopScene::showView(const View view)
 {
     if(!_rootLasagna)
         return;

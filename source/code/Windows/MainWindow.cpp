@@ -3,7 +3,7 @@
 #include "UnicodeBlocks.hpp"
 #include <array>
 
-TestProject::MainWindow::MainWindow()
+DemoApp::MainWindow::MainWindow()
 {
     //The scripts the test app shows. A block comes into a font and size the first time a text there needs it.
     RetroFuturaGUI::FontManager::AddCharset("Latin", std::array { Latin1SupplementFirst });

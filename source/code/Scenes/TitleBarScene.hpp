@@ -2,7 +2,7 @@
 #include "TitleBarScene_p.hpp"
 #include <string>
 
-namespace TestProject
+namespace DemoApp
 {
     class TitleBarScene final : public TitleBarScene_p
     {

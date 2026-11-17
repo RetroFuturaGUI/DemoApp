@@ -1,7 +1,7 @@
 #pragma once
 #include "MainWindow_p.hpp"
 
-namespace TestProject
+namespace DemoApp
 {
     class MainWindow final : public MainWindow_p
     {

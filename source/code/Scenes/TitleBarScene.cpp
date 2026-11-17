@@ -1,6 +1,6 @@
 #include "TitleBarScene.hpp"
 
-void TestProject::TitleBarScene::ShowTitle(std::string title)
+void DemoApp::TitleBarScene::ShowTitle(std::string title)
 {
     if(!_title)
         return;

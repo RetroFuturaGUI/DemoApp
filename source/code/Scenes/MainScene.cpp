@@ -1,11 +1,11 @@
 #include "MainScene.hpp"
 
-void TestProject::MainScene::LoadColorfulPopScene()
+void DemoApp::MainScene::LoadColorfulPopScene()
 {
     loadScene("ColorfulPopScene");
 }
 
-void TestProject::MainScene::LoadNoteScene()
+void DemoApp::MainScene::LoadNoteScene()
 {
     loadScene("NoteScene");
 }

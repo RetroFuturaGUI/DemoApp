@@ -4,7 +4,7 @@
 #include <array>
 #include <chrono>
 
-namespace TestProject
+namespace DemoApp
 {
     /// @brief The ColorfulPop scene
     class ColorfulPopScene final : public ColorfulPopScene_p

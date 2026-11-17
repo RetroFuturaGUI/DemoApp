@@ -1,4 +1,4 @@
-# TestProject
+# DemoApp
 
 A project to test and help develope RetroFuturaGUI.
 
@@ -43,7 +43,7 @@ Windows:
 ```
 cmake -S . -B build/Windows-Debug -G Ninja -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-windows -DTARGETPLATFORM=x64-windows -DROUX_PLATFORM=Windows -DCMAKE_BUILD_TYPE=Debug
 cmake --build build/Windows-Debug
-build/Windows-Debug/TestProject.exe
+build/Windows-Debug/DemoApp.exe
 ```
 
 Linux:
@@ -51,7 +51,7 @@ Linux:
 ```
 cmake -S . -B build/Linux-Debug -G Ninja -DCMAKE_TOOLCHAIN_FILE="$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" -DVCPKG_TARGET_TRIPLET=x64-linux -DTARGETPLATFORM=x64-linux -DROUX_PLATFORM=Linux -DCMAKE_BUILD_TYPE=Debug
 cmake --build build/Linux-Debug
-./build/Linux-Debug/TestProject
+./build/Linux-Debug/DemoApp
 ```
 
 For a release build, use `Release` in the folder name and in `-DCMAKE_BUILD_TYPE`.
@@ -59,6 +59,6 @@ For a release build, use `Release` in the folder name and in `-DCMAKE_BUILD_TYPE
 ## The shared library for C#, Python and Rust
 
 `-DLANG=<LANG>` no longer picks it. Set the platform's language in `Project.bechaml` (Roux's Project tab) to C#, Python
-or Rust and run Generate: the build then makes the shared library `TestProjectNative` and runs the language's steps at
+or Rust and run Generate: the build then makes the shared library `DemoAppNative` and runs the language's steps at
 the end of `CMakeLists.txt` (copying the binding file and the build output into `source/code/CSharpProject`,
 `source/code/RustProject` or `source/code/Python`).

@@ -3,7 +3,7 @@
 #include "IncludeHelper.hpp"
 #include <string_view>
 
-namespace TestProject
+namespace DemoApp
 {
     /// @brief A multiline text box to type into. A row of buttons above it switches the text's fill, raster, fog, glass, a metal
     ///        image and an outline, to test the text effects, and a second row puts sample texts into it: emoji, kanji, Thai,

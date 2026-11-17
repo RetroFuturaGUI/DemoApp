@@ -1,5 +1,5 @@
 <Project>
-    <Name>"TestProject"</Name>
+    <Name>"DemoApp"</Name>
     <Identifier>""</Identifier>
     <Version>"0.1.0"</Version>
     <CMakeVersion>"3.16"</CMakeVersion>

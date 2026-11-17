@@ -5,7 +5,7 @@
 #include <span>
 #include <string_view>
 
-void TestProject::NoteScene::SwitchFill()
+void DemoApp::NoteScene::SwitchFill()
 {
     if(!_noteTextBox)
         return;
@@ -19,7 +19,7 @@ void TestProject::NoteScene::SwitchFill()
     _fillButton->GetText().SetString(fillNames[static_cast<uSize>(_textFillType)], false);
 }
 
-void TestProject::NoteScene::SwitchRaster()
+void DemoApp::NoteScene::SwitchRaster()
 {
     if(!_noteTextBox)
         return;
@@ -31,7 +31,7 @@ void TestProject::NoteScene::SwitchRaster()
     styleEffectButton(_rasterButton.Get(), isOn);
 }
 
-void TestProject::NoteScene::SwitchFog()
+void DemoApp::NoteScene::SwitchFog()
 {
     if(!_noteTextBox)
         return;
@@ -44,7 +44,7 @@ void TestProject::NoteScene::SwitchFog()
     styleEffectButton(_fogButton.Get(), isOn);
 }
 
-void TestProject::NoteScene::SwitchGlass()
+void DemoApp::NoteScene::SwitchGlass()
 {
     if(!_noteTextBox)
         return;
@@ -61,7 +61,7 @@ void TestProject::NoteScene::SwitchGlass()
     styleEffectButton(_glassButton.Get(), isOn);
 }
 
-void TestProject::NoteScene::SwitchMetal()
+void DemoApp::NoteScene::SwitchMetal()
 {
     if(!_noteTextBox)
         return;
@@ -89,7 +89,7 @@ void TestProject::NoteScene::SwitchMetal()
     styleEffectButton(_metalButton.Get(), isOn);
 }
 
-void TestProject::NoteScene::SwitchOutline()
+void DemoApp::NoteScene::SwitchOutline()
 {
     if(!_noteTextBox)
         return;
@@ -106,47 +106,47 @@ void TestProject::NoteScene::SwitchOutline()
     styleEffectButton(_outlineButton.Get(), isOn);
 }
 
-void TestProject::NoteScene::ShowEffectsSample()
+void DemoApp::NoteScene::ShowEffectsSample()
 {
     showSample(TextSample::Effects);
 }
 
-void TestProject::NoteScene::ShowEmojiSample()
+void DemoApp::NoteScene::ShowEmojiSample()
 {
     showSample(TextSample::Emoji);
 }
 
-void TestProject::NoteScene::ShowKanjiSample()
+void DemoApp::NoteScene::ShowKanjiSample()
 {
     showSample(TextSample::Kanji);
 }
 
-void TestProject::NoteScene::ShowThaiSample()
+void DemoApp::NoteScene::ShowThaiSample()
 {
     showSample(TextSample::Thai);
 }
 
-void TestProject::NoteScene::ShowMixedSample()
+void DemoApp::NoteScene::ShowMixedSample()
 {
     showSample(TextSample::Mixed);
 }
 
-void TestProject::NoteScene::ShowRightToLeftSample()
+void DemoApp::NoteScene::ShowRightToLeftSample()
 {
     showSample(TextSample::RightToLeft);
 }
 
-void TestProject::NoteScene::ShowVerticalSample()
+void DemoApp::NoteScene::ShowVerticalSample()
 {
     showSample(TextSample::Vertical);
 }
 
-void TestProject::NoteScene::LoadMainScene()
+void DemoApp::NoteScene::LoadMainScene()
 {
     loadScene("MainScene");
 }
 
-void TestProject::NoteScene::showSample(const TextSample sample)
+void DemoApp::NoteScene::showSample(const TextSample sample)
 {
     if(!_noteTextBox)
         return;
@@ -163,7 +163,7 @@ void TestProject::NoteScene::showSample(const TextSample sample)
     styleEffectButton(getSampleButton(sample), true);
 }
 
-RetroFuturaGUI::Button* TestProject::NoteScene::getSampleButton(const TextSample sample) const
+RetroFuturaGUI::Button* DemoApp::NoteScene::getSampleButton(const TextSample sample) const
 {
     switch(sample)
     {
@@ -184,7 +184,7 @@ RetroFuturaGUI::Button* TestProject::NoteScene::getSampleButton(const TextSample
     }
 }
 
-std::string_view TestProject::NoteScene::getSampleText(const TextSample sample)
+std::string_view DemoApp::NoteScene::getSampleText(const TextSample sample)
 {
     switch(sample)
     {
@@ -225,7 +225,7 @@ std::string_view TestProject::NoteScene::getSampleText(const TextSample sample)
     }
 }
 
-void TestProject::NoteScene::applyTextColors()
+void DemoApp::NoteScene::applyTextColors()
 {
     if(!_noteTextBox)
         return;
@@ -249,7 +249,7 @@ void TestProject::NoteScene::applyTextColors()
         _noteTextBox->GetText().SetColors(textColors, state);
 }
 
-void TestProject::NoteScene::styleEffectButton(RetroFuturaGUI::Button* button, const bool isOn)
+void DemoApp::NoteScene::styleEffectButton(RetroFuturaGUI::Button* button, const bool isOn)
 {
     if(!button)
         return;

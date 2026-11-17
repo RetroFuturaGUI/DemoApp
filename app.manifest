@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-  <assemblyIdentity type="win32" name="TestProject" version="1.0.0.0"/>
+  <assemblyIdentity type="win32" name="DemoApp" version="1.0.0.0"/>
   <application xmlns="urn:schemas-microsoft-com:asm.v3">
     <windowsSettings>
       <!-- Makes the process ANSI codepage UTF-8 (Windows 10 1903+), figure out what to do about older Windows versions later -->

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Counts lines of code across CMake, .hpp, .cpp, and shader files for the
-# three project components (TestProject, RetroFuturaGUI, PlatformBridge),
+# three project components (DemoApp, RetroFuturaGUI, PlatformBridge),
 # which are nested git submodules. Each component is counted excluding its
 # nested submodule(s) so files aren't double-counted, plus a grand total.
 #
@@ -54,16 +54,16 @@ count_dir() {
     echo "$file_count $line_count"
 }
 
-read -r tp_files tp_lines <<< "$(count_dir "$ROOT" "$RETROFUTURAGUI_DIR")"
+read -r da_files da_lines <<< "$(count_dir "$ROOT" "$RETROFUTURAGUI_DIR")"
 read -r rf_files rf_lines <<< "$(count_dir "$RETROFUTURAGUI_DIR" "$PLATFORMBRIDGE_DIR")"
 read -r pb_files pb_lines <<< "$(count_dir "$PLATFORMBRIDGE_DIR")"
 
-total_files=$((tp_files + rf_files + pb_files))
-total_lines=$((tp_lines + rf_lines + pb_lines))
+total_files=$((da_files + rf_files + pb_files))
+total_lines=$((da_lines + rf_lines + pb_lines))
 
 printf "%-20s %10s %12s\n" "Component" "Files" "Lines"
 printf "%-20s %10s %12s\n" "--------------------" "----------" "------------"
-printf "%-20s %10d %12d\n" "TestProject" "$tp_files" "$tp_lines"
+printf "%-20s %10d %12d\n" "DemoApp" "$da_files" "$da_lines"
 printf "%-20s %10d %12d\n" "RetroFuturaGUI" "$rf_files" "$rf_lines"
 printf "%-20s %10d %12d\n" "PlatformBridge" "$pb_files" "$pb_lines"
 printf "%-20s %10s %12s\n" "--------------------" "----------" "------------"

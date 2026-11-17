@@ -1,7 +1,7 @@
 #pragma once
 #include "MainScene_p.hpp"
 
-namespace TestProject
+namespace DemoApp
 {
     class MainScene final : public MainScene_p
     {

@@ -14,7 +14,7 @@
 #include <vector>
 
 //The binding opens the windows and runs their frames. The start window is the first one
-static std::vector<std::unique_ptr<TestProject::GeneratedWindow>> windows {};
+static std::vector<std::unique_ptr<DemoApp::GeneratedWindow>> windows {};
 
 extern "C" EXPORT_API void SetWorkingDirectory(const char* dir)
 {
@@ -26,12 +26,12 @@ extern "C" EXPORT_API void InitRetroFuturaGUI()
     PlatformBridge::RefreshPlatformBridge();
     RetroFuturaGUI::GlfwInit();
     RetroFuturaGUI::FontManager::Init();
-    windows.push_back(TestProject::GeneratedWindow::Create<TestProject::MainWindow>());
+    windows.push_back(DemoApp::GeneratedWindow::Create<DemoApp::MainWindow>());
 }
 
 extern "C" EXPORT_API void Draw()
 {
-    TestProject::GeneratedWindow::RunFrames(windows);
+    DemoApp::GeneratedWindow::RunFrames(windows);
 
     //The windows go while their contexts exist, the start window last; left to the library's unloading, they crash it
     while(!windows.empty())
@@ -176,7 +176,7 @@ extern "C" EXPORT_API bool OpenFileExplorer(const char* title, i32 width, i32 he
 
 i32 main()
 {
-    return TestProject::Start();
+    return DemoApp::Start();
 }
 
 #endif
