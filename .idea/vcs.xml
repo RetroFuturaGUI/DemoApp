@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/.bechaml" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/RetroFuturaGUI" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/RetroFuturaGUI/PlatformBridge" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Roux" vcs="Git" />
+  </component>
+</project>

@@ -39,6 +39,17 @@
             "environment": [],
             "console": "integratedTerminal"
         },
+        {
+            "name": "Roux extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": [
+                "--extensionDevelopmentPath=${workspaceFolder}/Roux/hosts/vscode",
+                "${workspaceFolder}/source/code"
+            ],
+            "outFiles": [ "${workspaceFolder}/Roux/hosts/vscode/out/**/*.js" ],
+            "preLaunchTask": "Roux: build"
+        },
 
     ]
 }

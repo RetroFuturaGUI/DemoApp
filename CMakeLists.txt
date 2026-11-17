@@ -27,7 +27,7 @@ if(MSVC)
     add_compile_options(/utf-8)
 endif()
 
-# >>> Roux: target. Rewritten on every Generate. The files come from source/code/ and source/generated/.
+# >>> Roux: target. Rewritten on every Generate. The files come from source/code/ and source/generated/
 if(ROUX_DYNLIB)
     add_library("TestProject" SHARED ${ROUX_SOURCES})
     set_target_properties("TestProject" PROPERTIES OUTPUT_NAME "TestProjectNative")
@@ -63,14 +63,14 @@ else()
 endif()
 
 # >>> Roux: library. Rewritten on every Generate.
-# The same flags reach RetroFuturaGUI and what it builds, which set none of their own.
+# The same flags reach RetroFuturaGUI and what it builds, which set none of their own
 add_compile_options(${ROUX_COMPILE_OPTIONS})
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RetroFuturaGUI")
 target_link_libraries("TestProject" PRIVATE "RetroFuturaGUI")
 # <<< Roux
 
-# >>> Roux: assets. Rewritten on every Generate; the asset folders are listed in Project.bechaml.
-# Copied on every build, after the program, so a changed asset or shader arrives even when the program isn't rebuilt.
+# >>> Roux: assets. Rewritten on every Generate. The asset folders are listed in Project.bechaml.
+# Copied on every build, after the program, so a changed asset or shader arrives even when the program isn't rebuilt
 if(CMAKE_VERSION VERSION_GREATER_EQUAL 3.26)
     set(ROUX_COPY_DIRECTORY copy_directory_if_different)
 else()
