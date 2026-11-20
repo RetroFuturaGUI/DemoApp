@@ -9,6 +9,7 @@ namespace DemoApp
         explicit MainScene(RetroFuturaGUI::Window* parentWindow) : MainScene_p(parentWindow) {}
 
     privateSlots:
+        void LoadY2KFuturismScene() override;
         void LoadColorfulPopScene() override;
         void LoadNoteScene() override;
     };

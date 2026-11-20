@@ -8,3 +8,4 @@ source/code/Python/*
 RetroFuturaGuiBinding.*
 CLAUDE.md
 source/generated/
+count_loc.sh

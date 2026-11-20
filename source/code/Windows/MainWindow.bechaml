@@ -1,4 +1,4 @@
-<!-- The test app's one window: the title bar docked at the top, and below it the main menu or the scene it loads. -->
+<!-- The test app's main window: the title bar is docked at the top, and below it the main menu or the scene it loads -->
 <Window Name="MainWindow" Title="RetroFuturaGUI Test" Width=1280 Height=720 Perspective=900.0>
 
     <!-- Halftone dots, black, growing toward the bottom right and drifting slowly. -->
@@ -15,4 +15,5 @@
     <Scene Name="MainScene" Start/>
     <Scene Name="ColorfulPopScene"/>
     <Scene Name="NoteScene"/>
+    <Scene Name="Y2KFuturismScene"/>
 </Window>

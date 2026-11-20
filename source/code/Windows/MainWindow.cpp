@@ -19,7 +19,7 @@ DemoApp::MainWindow::MainWindow()
     RetroFuturaGUI::FontManager::AddCharset("ChineseExtensionG", std::array { CJKUnifiedIdeographsExtensionGFirst }); //𰻝
     RetroFuturaGUI::FontManager::SetCharsetFont("Japanese", "Noto Serif JP"); //rather than Yu Mincho, as it also has Chinese forms like 龟 and radicals like ⻱
     RetroFuturaGUI::FontManager::SetCharsetFont("ChineseExtensionG", "SimSun-ExtG");
-    RetroFuturaGUI::FontManager::SetCharsetFont("Thai", "Leelawadee UI"); //which Windows ships
+    RetroFuturaGUI::FontManager::SetCharsetFont("Thai", "Chakra Petch");
     RetroFuturaGUI::FontManager::SetCharsetFont("Emoji", "Segoe UI Emoji");
 #endif
 }

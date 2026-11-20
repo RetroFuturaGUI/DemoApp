@@ -1,0 +1,150 @@
+<!-- The Y2KFuturism scene: metal pipe frames on a deep blue, after the menus of late-90s and early-2000s anti gravity sci-fi racing games. -->
+<Scene Name="Y2KFuturismScene" Title="Y2K Futurism" OnLoad=Slots.SetUpWidgets>
+    <Slot>void SetUpWidgets()</Slot>
+
+    <!-- Rows: the header, the top and the bottom row, each with a tenth of its height as padding above and below, and the
+         footer. Columns: three widgets, each with a tenth of its width as padding left and right. The padding tracks between
+         two widgets hold the pipes. Layer 0 is in front: the widgets; 1: the panels and pipes behind them; 2: the Environment. -->
+    <Lasagna Name="RootLasagna"
+             Rows={ 0.14, 0.038, 0.304, 0.076, 0.304, 0.038, 0.1 }
+             Columns={ 0.0333, 0.2667, 0.0667, 0.2666, 0.0667, 0.2667, 0.0333 }
+             Layers=3>
+
+        <!-- Header. The brushed metal shows through the text's and the outline's transparent colors, tiled since it's seamless. -->
+        <Label Name="Title" Row=0 Column=0 ColSpan=3>
+            <Text String="DEMO/デモ/สาธิต" FontFamily="M PLUS 1 Code" FontSize=44.0 FontWeight="Bold" Alignment="Left" Padding=16.0
+                  LetterSpacing=-2.0 Colors={ 1.0, 1.0, 1.0, 0.0 } Image=RetroFuturaGUI.Images.metal128_bright.png ImageFit="Repeat">
+                <Outline Colors={ 1.0, 1.0, 1.0, 0.0 } Width=4.0 Image=RetroFuturaGUI.Images.metal128_dark.png ImageFit="Repeat"/>
+                <!-- A slight inner shadow inside the letters only, setting them off from the rim. -->
+                <InnerGlow Shown Colors={ 0.02, 0.04, 0.12, 0.5 } Width=2.0 Distance=1.0 Degree=-45.0/>
+                <DropShadow Shown Colors=#05081A Distance=4.0 Degree=-45.0 Blur=1.0/>
+            </Text>
+        </Label>
+
+        <!-- Static until labels can scroll their text. -->
+        <Label Name="Ticker" Row=0 Column=3 ColSpan=4 Padding=18.0>
+            <Text String="Y2K Futurism   ·   Pick a widget   ·   RetroFuturaGUI test scene" FontFamily="Arial" FontSize=22.0 Alignment="Left" Padding=16.0 Colors=#DFFBFF>
+                <Glow Shown Colors=#22C7F0 Width=4.0/>
+            </Text>
+        </Label>
+
+        <SeparatorLine Name="TickerBar" Row=0 Column=3 ColSpan=4 Layer=1 Padding=18.0>
+            <Background Colors={ 0.02, 0.06, 0.18, 0.85 } FillType="Solid" CornerRadii={ 10.0, 10.0, 10.0, 10.0 }>
+                <InnerGlow Shown Colors=#2E6BFF Width=8.0/>
+            </Background>
+        </SeparatorLine>
+
+        <!-- Top row. -->
+        <Button Name="LaunchButton" Row=2 Column=1>
+            <Background Colors:Enabled={ 0.04, 0.12, 0.32, 0.85 } Colors:Hover={ 0.07, 0.2, 0.48, 0.9 } Colors:Clicked={ 0.1, 0.3, 0.62, 0.95 }
+                        FillType="Solid" CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <InnerGlow Shown Colors=#3FD8FF Width=14.0/>
+            </Background>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=8.0 CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <DropShadow Shown Colors=#05081A Distance=6.0 Degree=-45.0 Blur=4.0/>
+            </Border>
+            <Text String="LAUNCH" FontFamily="Arial" FontSize=30.0 FontWeight="Black" Alignment="Center" Colors=#DFFBFF>
+                <Glow Shown Colors=#22C7F0 Width=8.0/>
+            </Text>
+        </Button>
+
+        <LineDiagram Name="Speed" Row=2 Column=3>
+            <Background Colors={ 0.04, 0.12, 0.32, 0.85 } FillType="Solid" CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <InnerGlow Shown Colors=#3FD8FF Width=14.0/>
+            </Background>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=8.0 CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <DropShadow Shown Colors=#05081A Distance=6.0 Degree=-45.0 Blur=4.0/>
+            </Border>
+            <Indicator Shown=False/>
+            <Graph Shown/>
+            <LineGlow Shown Colors=#22C7F0 Width=6.0/>
+        </LineDiagram>
+
+        <ComboBox Name="Finish" Row=2 Column=5 Caption="Finish">
+            <Background Colors:Enabled={ 0.04, 0.12, 0.32, 0.85 } Colors:Hover={ 0.07, 0.2, 0.48, 0.9 } Colors:Clicked={ 0.1, 0.3, 0.62, 0.95 }
+                        FillType="Solid" CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <InnerGlow Shown Colors=#3FD8FF Width=14.0/>
+            </Background>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=8.0 CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <DropShadow Shown Colors=#05081A Distance=6.0 Degree=-45.0 Blur=4.0/>
+            </Border>
+            <ItemText FontFamily={ "Arial", 26.0, "Pixels", "Roman", "Black" } Alignment="Center" Colors=#DFFBFF/>
+            <Arrow Colors=#3FD8FF/>
+        </ComboBox>
+
+        <!-- Bottom row. -->
+        <MultilineTextBox Name="Notes" Row=4 Column=1>
+            <Background Colors:Enabled={ 0.04, 0.12, 0.32, 0.85 } Colors:Hover={ 0.07, 0.2, 0.48, 0.9 } Colors:Clicked={ 0.07, 0.2, 0.48, 0.9 }
+                        FillType="Solid" CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <InnerGlow Shown Colors=#3FD8FF Width=14.0/>
+            </Background>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=8.0 CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <DropShadow Shown Colors=#05081A Distance=6.0 Degree=-45.0 Blur=4.0/>
+            </Border>
+            <Text String="Chrome, neon\nand liquid metal" FontFamily="Arial" FontSize=22.0 Alignment="Left" Padding=20.0
+                  Colors:Enabled=#DFFBFF Colors:Hover=#DFFBFF Colors:Clicked=#DFFBFF/>
+            <Placeholder String="Type a note..." Colors={ 0.45, 0.6, 0.75 }/>
+            <Caret Colors=#3FD8FF BlinkTime=650.0/>
+        </MultilineTextBox>
+
+        <!-- No caption yet: a captioned group lays its caption out again on every change the layout itself makes, until the
+             stack overflows. -->
+        <RadioButtonGroup Name="Mode" Row=4 Column=3>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=8.0 CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <DropShadow Shown Colors=#05081A Distance=6.0 Degree=-45.0 Blur=4.0/>
+            </Border>
+        </RadioButtonGroup>
+
+        <!-- The radio button group has no background of its own, so this panel lies behind it. -->
+        <SeparatorLine Name="ModePanel" Row=4 Column=3 Layer=1 Padding=4.0>
+            <Background Colors={ 0.04, 0.12, 0.32, 0.85 } FillType="Solid" CornerRadii={ 12.0, 12.0, 12.0, 12.0 }>
+                <InnerGlow Shown Colors=#3FD8FF Width=14.0/>
+            </Background>
+        </SeparatorLine>
+
+        <Histogram Name="Boost" Row=4 Column=5 BarInterstice=6.0>
+            <Background Colors={ 0.04, 0.12, 0.32, 0.85 } FillType="Solid" CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <InnerGlow Shown Colors=#3FD8FF Width=14.0/>
+            </Background>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=8.0 CornerRadii={ 14.0, 14.0, 14.0, 14.0 }>
+                <DropShadow Shown Colors=#05081A Distance=6.0 Degree=-45.0 Blur=4.0/>
+            </Border>
+            <Indicator Shown=False/>
+            <Graph Shown Colors={ #5CE1FF, #2E6BFF } FillType="LinearShift" GradientDegree=90.0/>
+        </Histogram>
+
+        <!-- Pipes between the frames, reaching under them. -->
+        <SeparatorLine Name="TopLeftPipe" Row=2 Column=2 Layer=1 SizingMode="FILL_X" Size={ 40.0, 14.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=90.0/>
+        </SeparatorLine>
+        <SeparatorLine Name="TopRightPipe" Row=2 Column=4 Layer=1 SizingMode="FILL_X" Size={ 40.0, 14.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=90.0/>
+        </SeparatorLine>
+        <SeparatorLine Name="BottomLeftPipe" Row=4 Column=2 Layer=1 SizingMode="FILL_X" Size={ 40.0, 14.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=90.0/>
+        </SeparatorLine>
+        <SeparatorLine Name="BottomRightPipe" Row=4 Column=4 Layer=1 SizingMode="FILL_X" Size={ 40.0, 14.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=90.0/>
+        </SeparatorLine>
+        <SeparatorLine Name="LeftPipe" Row=3 Column=1 Layer=1 SizingMode="FILL_Y" Size={ 14.0, 40.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=0.0/>
+        </SeparatorLine>
+        <SeparatorLine Name="MiddlePipe" Row=3 Column=3 Layer=1 SizingMode="FILL_Y" Size={ 14.0, 40.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=0.0/>
+        </SeparatorLine>
+        <SeparatorLine Name="RightPipe" Row=3 Column=5 Layer=1 SizingMode="FILL_Y" Size={ 14.0, 40.0, 0.01 } Padding=-10.0>
+            <Background Colors={ #5E6370, #F2F4F8, #8A8F9C, #5E6370 } FillType="LinearShift" GradientDegree=0.0/>
+        </SeparatorLine>
+
+        <!-- Footer. -->
+        <Button Name="ReturnButton" Row=6 Column=5 Padding=12.0 OnClick=Scenes.MainScene>
+            <Background Colors:Enabled={ 0.04, 0.12, 0.32, 0.85 } Colors:Hover={ 0.07, 0.2, 0.48, 0.9 } Colors:Clicked={ 0.1, 0.3, 0.62, 0.95 }
+                        FillType="Solid" CornerRadii={ 10.0, 10.0, 10.0, 10.0 }/>
+            <Border Colors={ #F2F4F8, #8A8F9C, #D9DCE3, #5E6370 } FillType="LinearShift" GradientDegree=90.0 Width=4.0 CornerRadii={ 10.0, 10.0, 10.0, 10.0 }/>
+            <Text String="Return" FontFamily="Arial" FontSize=20.0 FontWeight="Bold" Alignment="Center" Colors=#DFFBFF/>
+        </Button>
+
+        <!-- Behind everything; it will hold a 3D scene. -->
+        <Environment Name="Backdrop" Row=0 Column=0 RowSpan=7 ColSpan=7 Layer=2/>
+    </Lasagna>
+</Scene>
